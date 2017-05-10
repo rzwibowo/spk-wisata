@@ -56,7 +56,7 @@ if (!isset($_SESSION["user"])) header("Location: login.php");
         var username;
         var password;
     /*
-     validasi nama propinsi , tidak bleh kosong
+     validasi nama user , tidak bleh kosong
     */
         $("#username").blur(function(){
             username= $(this).val();
@@ -64,7 +64,7 @@ if (!isset($_SESSION["user"])) header("Location: login.php");
             {
               $("#message-username").show();
               $("#message-username").addClass("message error");
-              $("#message-username").html("<span>Nama user tidak boleh kosong!</span>");
+              $("#message-username").html("<span>Username tidak boleh kosong!</span>");
             }else
             {
                 $("#message-username").hide();
@@ -72,7 +72,7 @@ if (!isset($_SESSION["user"])) header("Location: login.php");
         });
 
     /*
-     validasi nama password , tidak bleh kosong
+     validasi password , tidak bleh kosong
     */
         $("#password").blur(function(){
             password= $(this).val();
@@ -81,7 +81,7 @@ if (!isset($_SESSION["user"])) header("Location: login.php");
             {
               $("#message-password").show();
               $("#message-password").addClass("message error");
-              $("#message-password").html("<span>Nama ib ukota tidak boleh kosong!</span>");
+              $("#message-password").html("<span>Password tidak boleh kosong!</span>");
             }else
             {
               $("#message-password").hide();
@@ -100,14 +100,14 @@ if (!isset($_SESSION["user"])) header("Location: login.php");
            if(username.length==0){
                $("#username").focus();
                $("#message-username").addClass("message error");
-               $("#message-username").html("<span>nama propinsi tidak boleh kosong!</span>");
+               $("#message-username").html("<span>username tidak boleh kosong!</span>");
                return false;
             }
             else if(password.length==0)
             {
                 $("#password").focus();
                 $("#message-password").addClass("message error");
-                $("#message-password").html("<span>nama ibu kota tidak boleh kosong!</span>");
+                $("#message-password").html("<span>password tidak boleh kosong!</span>");
                 return false;
             }
             else

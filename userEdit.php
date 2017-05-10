@@ -63,7 +63,7 @@ $row = mysqli_fetch_assoc($hasil);
         var username;
         var password;
     /*
-     validasi nama propinsi , tidak bleh kosong
+     validasi username , tidak bleh kosong
     */
         $("#username").blur(function(){
             username= $(this).val();
@@ -71,7 +71,7 @@ $row = mysqli_fetch_assoc($hasil);
             {
               $("#message-username").show();
               $("#message-username").addClass("message error");
-              $("#message-username").html("<span>Nama propinsi tidak boleh kosong!</span>");
+              $("#message-username").html("<span>username tidak boleh kosong!</span>");
             }else
             {
                 $("#message-username").hide();
@@ -79,7 +79,7 @@ $row = mysqli_fetch_assoc($hasil);
         });
 
     /*
-     validasi nama password , tidak bleh kosong
+     validasi password , tidak bleh kosong
     */
         $("#password").blur(function(){
             password= $(this).val();
@@ -88,7 +88,7 @@ $row = mysqli_fetch_assoc($hasil);
             {
               $("#message-password").show();
               $("#message-password").addClass("message error");
-              $("#message-password").html("<span>Nama ib ukota tidak boleh kosong!</span>");
+              $("#message-password").html("<span>password tidak boleh kosong!</span>");
             }else
             {
               $("#message-password").hide();
@@ -106,14 +106,14 @@ $row = mysqli_fetch_assoc($hasil);
            if(username.length==0){
                $("#username").focus();
                $("#message-username").addClass("message error");
-               $("#message-username").html("<span>nama propinsi tidak boleh kosong!</span>");
+               $("#message-username").html("<span>username tidak boleh kosong!</span>");
                return false;
             }
             else if(password.length==0)
             {
                 $("#password").focus();
                 $("#message-password").addClass("message error");
-                $("#message-password").html("<span>nama ibu kota tidak boleh kosong!</span>");
+                $("#message-password").html("<span>password tidak boleh kosong!</span>");
                 return false;
             }
 

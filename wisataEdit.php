@@ -37,9 +37,9 @@ $row = mysqli_fetch_assoc($hasil);
                     <fieldset>
                         <input type="hidden" name="id_wisata" class="w50" id="id_wisata" value="<?php echo $row['id_wisata']?>">
                         <input type="hidden" name="id_wisata" class="w50" id="fasilitas" value="<?php echo $row['fasilitas']?>">
-                        <input type="hidden" name="jml_pengunjung" class="w50" id="id_wisata" value="<?php echo $row['jml_pengunjung']?>">
-                        <input type="hidden" name="id_wisata" class="w50" id="id_wisata" value="<?php echo $row['transportasi']?>">
-                        <input type="hidden" name="transportasi" class="w50" id="infrastruktur" value="<?php echo $row['infrastruktur']?>">
+                        <input type="hidden" name="jml_pengunjung" class="w50" id="jml_pengunjung" value="<?php echo $row['jml_pengunjung']?>">
+                        <input type="hidden" name="transportasi class="w50" id="transportasi" value="<?php echo $row['transportasi']?>">
+                        <input type="hidden" name="infrastruktur" class="w50" id="infrastruktur" value="<?php echo $row['infrastruktur']?>">
                         <div class="form-item">
                             <label for="nama_wisata">Nama Wisata</label>
                             <input type="text" name="nama_wisata" class="w50" id="nama_wisata" value="<?php echo $row['nama_wisata']?>">
@@ -105,10 +105,11 @@ $row = mysqli_fetch_assoc($hasil);
         var transportasi=$("#transportasi").val();
         var infrastruktur=$("#infrastruktur").val();
 
-        if($("input[name='fasilitas']").val()===fasilitas){
-            $(this).attr('checked','checked');
-        }
-
+        $("input:radio[name=fasilitas][value="+fasilitas+"]").attr('checked','checked');
+        $("input:radio[name=jml_pengunjung][value="+jml_pengunjung+"]").attr('checked','checked');
+        $("input:radio[name=transportasi][value="+transportasi+"]").attr('checked','checked');
+        $("input:radio[name=infrastruktur][value="+infrastruktur+"]").attr('checked','checked');
+        
         var nama_wisata;
         var password;
     /*

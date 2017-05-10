@@ -97,7 +97,7 @@ if (!isset($_SESSION["user"])) header("Location: login.php");
         var transportasi;
         var infrastruktur;
     /*
-     validasi nama propinsi , tidak bleh kosong
+     validasi nama wisata , tidak bleh kosong
     */
         $("#nama_wisata").blur(function(){
             nama_wisata= $(this).val();
@@ -105,7 +105,7 @@ if (!isset($_SESSION["user"])) header("Location: login.php");
             {
               $("#message-nama_wisata").show();
               $("#message-nama_wisata").addClass("message error");
-              $("#message-nama_wisata").html("<span>Nama user tidak boleh kosong!</span>");
+              $("#message-nama_wisata").html("<span>Nama wisata tidak boleh kosong!</span>");
             }else
             {
                 $("#message-nama_wisata").hide();
@@ -114,7 +114,7 @@ if (!isset($_SESSION["user"])) header("Location: login.php");
 
 
     /*
-     validasi nama alamat , tidak bleh kosong
+     validasi alamat , tidak bleh kosong
     */
         $("#alamat").blur(function(){
             alamat= $(this).val();
@@ -123,7 +123,7 @@ if (!isset($_SESSION["user"])) header("Location: login.php");
             {
               $("#message-alamat").show();
               $("#message-alamat").addClass("message error");
-              $("#message-alamat").html("<span>Nama ib ukota tidak boleh kosong!</span>");
+              $("#message-alamat").html("<span>alamat tidak boleh kosong!</span>");
             }else
             {
               $("#message-alamat").hide();
@@ -131,7 +131,7 @@ if (!isset($_SESSION["user"])) header("Location: login.php");
         });
       
     /*
-     validasi nama keterangan , tidak bleh kosong
+     validasi keterangan , tidak bleh kosong
     */
         $("#keterangan").blur(function(){
             keterangan= $(this).val();
@@ -140,7 +140,7 @@ if (!isset($_SESSION["user"])) header("Location: login.php");
             {
               $("#message-keterangan").show();
               $("#message-keterangan").addClass("message error");
-              $("#message-keterangan").html("<span>Nama ib ukota tidak boleh kosong!</span>");
+              $("#message-keterangan").html("<span>keterangan tidak boleh kosong!</span>");
             }else
             {
               $("#message-keterangan").hide();
@@ -156,49 +156,49 @@ if (!isset($_SESSION["user"])) header("Location: login.php");
         nama_wisata       =$("#nama_wisata").val();
         alamat          =$("#alamat").val();
         keterangan          =$("#keterangan").val();
-        fasilitas       =$("input[name='fasilitas']:checked").val();
-        jml_pengunjung       =$("input[name='jml_pengunjung']:checked").val();
-        transportasi       =$("input[name='transportasi']:checked").val();
-        infrastruktur       =$("input[name='infrastruktur']:checked").val();
+        fasilitas       =$("input:radio[name=fasilitas]:checked").val();
+        jml_pengunjung       =$("input:radio[name=jml_pengunjung]:checked").val();
+        transportasi       =$("input:radio[name=transportasi]:checked").val();
+        infrastruktur       =$("input:radio[name=infrastruktur]:checked").val();
            if(nama_wisata.length==0){
                $("#nama_wisata").focus();
                $("#message-nama_wisata").addClass("message error");
-               $("#message-nama_wisata").html("<span>nama propinsi tidak boleh kosong!</span>");
+               $("#message-nama_wisata").html("<span>nama wisata tidak boleh kosong!</span>");
                return false;
             }
             else if(alamat.length==0)
             {
                 $("#alamat").focus();
                 $("#message-alamat").addClass("message error");
-                $("#message-alamat").html("<span>nama ibu kota tidak boleh kosong!</span>");
+                $("#message-alamat").html("<span>alamat tidak boleh kosong!</span>");
                 return false;
             }
             else if(keterangan.length==0)
             {
                 $("#keterangan").focus();
                 $("#message-keterangan").addClass("message error");
-                $("#message-keterangan").html("<span>nama ibu kota tidak boleh kosong!</span>");
+                $("#message-keterangan").html("<span>keterangan tidak boleh kosong!</span>");
                 return false;
             }
-            else if(fasilitas.length==0)
+            else if(!fasilitas)
             {
                 $("#message-fasilitas").addClass("message error");
                 $("#message-fasilitas").html("<span>fasilitas tidak boleh kosong!</span>");
                 return false;
             }
-            else if(jml_pengunjung.length==0)
+            else if(!jml_pengunjung)
             {
                 $("#message-jml_pengunjung").addClass("message error");
-                $("#message-jml_pengunjung").html("<span>jml_pengunjung tidak boleh kosong!</span>");
+                $("#message-jml_pengunjung").html("<span>jumlah pengunjung tidak boleh kosong!</span>");
                 return false;
             }
-            else if(transportasi.length==0)
+            else if(!transportasi)
             {
                 $("#message-transportasi").addClass("message error");
                 $("#message-transportasi").html("<span>transportasi tidak boleh kosong!</span>");
                 return false;
             }
-            else if(infrastruktur.length==0)
+            else if(!infrastruktur)
             {
                 $("#message-infrastruktur").addClass("message error");
                 $("#message-infrastruktur").html("<span>infrastruktur tidak boleh kosong!</span>");

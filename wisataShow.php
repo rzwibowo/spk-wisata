@@ -10,7 +10,7 @@ include "koneksi.php";
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Daftar User</title>
+    <title>Daftar Wisata</title>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -29,7 +29,7 @@ include "koneksi.php";
     				
     			</div>
     			<div>
-                    <a href="wisataAdd.php" class="button">Tambah Wisata</a>                    
+                    <a href="wisataAdd.php" class="button">Tambah Data Wisata</a>                    
                 </div>
                 <br>
                 <div>
@@ -71,7 +71,7 @@ include "koneksi.php";
                         <a href='wisataDelete.php?r=".$row['id_wisata']."' class='button' onclick = 'if (! confirm('Yakin akan menghapus data?')) { return false; }' style='background-color: #ff3333' >Hapus</a>
                         </td>";
                         ?>
-                    <?php "</tr>"; ?>
+                    <?php echo"</tr>"; ?>
                     <?php $no++; } ?>
                 </tbody>
                 </table>
