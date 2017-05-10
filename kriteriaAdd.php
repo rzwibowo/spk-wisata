@@ -33,9 +33,9 @@ if (!isset($_SESSION["user"])) header("Location: login.php");
                             <div id="message-nama_kriteria" style="margin-top: 5px;"></div>
     					</div>
                         <div class="form-item">
-                            <label for="prioritas">Prioritas</label>
-                            <input type="number" name="prioritas" class="w20" id="prioritas" min="0">
-                            <div id="message-prioritas" style="margin-top: 5px;"></div>
+                            <label for="prioritas_kriteria">Prioritas</label>
+                            <input type="number" name="prioritas_kriteria" class="w20" id="prioritas_kriteria" step="0.01" min="0">
+                            <div id="message-prioritas_kriteria" style="margin-top: 5px;"></div>
                         </div>
     					
     					<div class="row between">

@@ -8,7 +8,7 @@ include "koneksi.php";
 $id= $_GET['r'];
  
 
-$sql = "select * from user where user_id='$id'";
+$sql = "select * from kriteria where kriteria_id='$id'";
 $hasil = mysqli_query ($koneksi,$sql) or die ("Gagal Akses");
 
 $row = mysqli_fetch_assoc($hasil);
@@ -16,7 +16,7 @@ $row = mysqli_fetch_assoc($hasil);
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Ubah Data User</title>
+    <title>Ubah Data Kriteria</title>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -30,21 +30,21 @@ $row = mysqli_fetch_assoc($hasil);
         <div class="row align-center">
             <div class="col-6">
                 <div class="head text-center">
-                    <h1>Data User</h1>
+                    <h1>Data Kriteria</h1>
                     
                 </div>
-                <form class="form" action="userUpdate.php" method="POST" name="form-kirim" enctype="multipart/form-data">
+                <form class="form" action="kriteriaUpdate.php" method="POST" name="form-kirim" enctype="multipart/form-data">
                     <fieldset>
-                        <input type="hidden" name="user_id" class="w50" id="user_id" value="<?php echo $row['user_id']?>">
+                        <input type="hidden" name="kriteria_id" class="w50" id="kriteria_id" value="<?php echo $row['kriteria_id']?>">
                         <div class="form-item">
-                            <label for="username">Nama User</label>
-                            <input type="text" name="username" class="w50" id="username" value="<?php echo $row['username']?>">
-                              <div id="message-username" style="margin-top: 5px;"></div>
+                            <label for="nama_kriteria">Nama Kriteria</label>
+                            <input type="text" name="nama_kriteria" class="w50" id="nama_kriteria" value="<?php echo $row['nama_kriteria']?>">
+                              <div id="message-nama_kriteria" style="margin-top: 5px;"></div>
                         </div>
                         <div class="form-item">
-                            <label for="password">Password</label>
-                            <input type="password" name="password" class="w50" id="password" value="">
-                            <div id="message-password" style="margin-top: 5px;"></div>
+                            <label for="prioritas_kriteria">Prioritas</label>
+                            <input type="number" name="prioritas_kriteria" class="w50" id="prioritas_kriteria" value="<?php echo $row['prioritas_kriteria']?>" step="0.01" min="0">
+                            <div id="message-prioritas_kriteria" style="margin-top: 5px;"></div>
                         </div>
                         <div class="row between">
                             <button type="reset" class="button secondary outline w15">Reset</button>
@@ -60,38 +60,38 @@ $row = mysqli_fetch_assoc($hasil);
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="js/kube.js"></script>
     <script type="text/javascript">
-        var username;
-        var password;
+        var nama_kriteria;
+        var prioritas_kriteria;
     /*
      validasi nama propinsi , tidak bleh kosong
     */
-        $("#username").blur(function(){
-            username= $(this).val();
-            if(username.length==0)
+        $("#nama_kriteria").blur(function(){
+            nama_kriteria= $(this).val();
+            if(nama_kriteria.length==0)
             {
-              $("#message-username").show();
-              $("#message-username").addClass("message error");
-              $("#message-username").html("<span>Nama propinsi tidak boleh kosong!</span>");
+              $("#message-nama_kriteria").show();
+              $("#message-nama_kriteria").addClass("message error");
+              $("#message-nama_kriteria").html("<span>Nama propinsi tidak boleh kosong!</span>");
             }else
             {
-                $("#message-username").hide();
+                $("#message-nama_kriteria").hide();
             } 
         });
 
     /*
-     validasi nama password , tidak bleh kosong
+     validasi nama prioritas_kriteria , tidak bleh kosong
     */
-        $("#password").blur(function(){
-            password= $(this).val();
+        $("#prioritas_kriteria").blur(function(){
+            prioritas_kriteria= $(this).val();
             
-            if(password.length==0)
+            if(prioritas_kriteria.length==0)
             {
-              $("#message-password").show();
-              $("#message-password").addClass("message error");
-              $("#message-password").html("<span>Nama ib ukota tidak boleh kosong!</span>");
+              $("#message-prioritas_kriteria").show();
+              $("#message-prioritas_kriteria").addClass("message error");
+              $("#message-prioritas_kriteria").html("<span>Nama ib ukota tidak boleh kosong!</span>");
             }else
             {
-              $("#message-password").hide();
+              $("#message-prioritas_kriteria").hide();
             } 
         });
       
@@ -100,20 +100,20 @@ $row = mysqli_fetch_assoc($hasil);
     */
     $("#kirim").click(function(){
     $('form[name=form-kirim]').submit(function(){
-        username       =$("#username").val();
-        password         =$("#password").val();
+        nama_kriteria       =$("#nama_kriteria").val();
+        prioritas_kriteria         =$("#prioritas_kriteria").val();
 
-           if(username.length==0){
-               $("#username").focus();
-               $("#message-username").addClass("message error");
-               $("#message-username").html("<span>nama propinsi tidak boleh kosong!</span>");
+           if(nama_kriteria.length==0){
+               $("#nama_kriteria").focus();
+               $("#message-nama_kriteria").addClass("message error");
+               $("#message-nama_kriteria").html("<span>nama propinsi tidak boleh kosong!</span>");
                return false;
             }
-            else if(password.length==0)
+            else if(prioritas_kriteria.length==0)
             {
-                $("#password").focus();
-                $("#message-password").addClass("message error");
-                $("#message-password").html("<span>nama ibu kota tidak boleh kosong!</span>");
+                $("#prioritas_kriteria").focus();
+                $("#message-prioritas_kriteria").addClass("message error");
+                $("#message-prioritas_kriteria").html("<span>nama ibu kota tidak boleh kosong!</span>");
                 return false;
             }
 

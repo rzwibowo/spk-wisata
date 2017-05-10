@@ -5,17 +5,16 @@ session_start();
 if (!isset($_SESSION["user"])) echo "<script>location.replace('login.php');</script>";
 
 include "koneksi.php";
-$id                  = $_POST['user_id'];
-$username           = $_POST['username'];
-$password			 = $_POST['password'];
-$passwordSafe=md5($password);
+$id                  = $_POST['kriteria_id'];
+$nama_kriteria           = $_POST['nama_kriteria'];
+$prioritas_kriteria			 = $_POST['prioritas_kriteria'];
 
-$queryUpdate="UPDATE user set username='$username', password='$passwordSafe' WHERE user_id='$id'"; 
+$queryUpdate="UPDATE user set nama_kriteria='$nama_kriteria', prioritas_kriteria='$prioritas_kriteria' WHERE kriteria_id='$id'"; 
 $query=mysqli_query($koneksi,$queryUpdate)or die(mysqli_error($koneksi));
 
 if($query)
 {
-	echo "<script>alert('Data berhasil dirubah'); window.location.replace('userShow.php');</script>";
+	echo "<script>alert('Data berhasil dirubah'); window.location.replace('kriteriaShow.php');</script>";
 }
 
 mysqli_close($koneksi);

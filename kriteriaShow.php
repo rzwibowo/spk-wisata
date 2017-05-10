@@ -10,7 +10,7 @@ include "koneksi.php";
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Daftar User</title>
+    <title>Daftar Kriteria</title>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,16 +25,16 @@ include "koneksi.php";
     	<div class="row align-center">
     		<div class="col-6">
     			<div class="text-center">
-    				<h1>Daftar User</h1>
+    				<h1>Daftar Kriteria</h1>
     				
     			</div>
     			<div>
-                    <a href="userAdd.php" class="button">Tambah User</a>                    
+                    <a href="kriteriaAdd.php" class="button">Tambah Kriteria</a>                    
                 </div>
                 <br>
                 <div>
                 <?php 
-                $sql = "select user_id,username from user";
+                $sql = "select * from kriteria";
                 $hasil = mysqli_query ($koneksi,$sql) or die ("Gagal Akses");
                 
                 $no=1;
@@ -43,9 +43,9 @@ include "koneksi.php";
                 ?>
                     <p>
                         <?php echo $no.". "; ?> 
-                        <?php echo $row['username']?>
-                        <a href="userEdit.php?r=<?php echo $row['user_id'] ?>" class="button">Edit</a>
-                        <a href="userDelete.php?r=<?php echo $row['user_id'] ?>" class="button" onclick = "if (! confirm('Yakin akan menghapus data?')) { return false; }" style="background-color: #ff3333" >Hapus</a>
+                        <?php echo $row['nama_kriteria']?>
+                        <a href="kriteriaEdit.php?r=<?php echo $row['kriteria_id'] ?>" class="button">Edit</a>
+                        <a href="kriteriaDelete.php?r=<?php echo $row['kriteria_id'] ?>" class="button" onclick = "if (! confirm('Yakin akan menghapus data?')) { return false; }" style="background-color: #ff3333" >Hapus</a>
                     </p>
                     <?php $no++; } ?>
                 </div>
