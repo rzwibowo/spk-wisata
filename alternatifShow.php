@@ -10,7 +10,7 @@ include "koneksi.php";
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Daftar Kriteria</title>
+    <title>Daftar Alternatif</title>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,11 +25,11 @@ include "koneksi.php";
     	<div class="row align-center">
     		<div class="col-6">
     			<div class="text-center">
-    				<h1>Daftar Kriteria</h1>
+    				<h1>Daftar Alternatif</h1>
     				
     			</div>
     			<div>
-                    <a href="kriteriaAdd.php" class="button">Tambah Kriteria</a>                    
+                    <a href="alternatifAdd.php" class="button">Tambah Alternatif</a>                    
                 </div>
                 <br>
                 <div>
@@ -37,13 +37,14 @@ include "koneksi.php";
                 <thead>
                     <tr>
                         <th>No. </th>
-                        <th>Nama Kriteria</th>
-                        <th>Prioritas</th>
+                        <th>Nama Wisata</th>
+                        <th>Periode</th>
+                        <th>Global</th>
                         <th>Operasi</th>
                     </tr>
                 </thead>
                 <?php 
-                $sql = "select * from kriteria";
+                $sql = "select id_alternatif,alternatif.id_wisata,wisata.nama_wisata,periode,global from alternatif,wisata where alternatif.id_wisata=wisata.id_wisata";
                 $hasil = mysqli_query ($koneksi,$sql) or die ("Gagal Akses");
                 
                 $no=1;
@@ -52,12 +53,13 @@ include "koneksi.php";
                 ?>
                     <?php echo "<tr>" ?>
                         <?php echo "<td>".$no.". </td>"; ?> 
-                        <?php echo "<td>".$row['nama_kriteria']."</td>";?>
-                        <?php echo "<td>".$row['prioritas_kriteria']."</td>";?>
+                        <?php echo "<td>".$row['nama_wisata']."</td>";?>
+                        <?php echo "<td>".date("M Y",strtotime($row['periode']))."</td>";?>
+                        <?php echo "<td>".$row['global']."</td>";?>
                         <?php echo
                         "<td>
-                        <a href='kriteriaEdit.php?r=".$row['kriteria_id']."' class='button'>Edit</a>
-                        <a href='kriteriaDelete.php?r=".$row['kriteria_id']."' class='button' onclick = 'if (! confirm('Yakin akan menghapus data?')) { return false; }' style='background-color: #ff3333' >Hapus</a>
+                        <a href='alternatifEdit.php?r=".$row['id_alternatif']."' class='button'>Edit</a>
+                        <a href='alternatifDelete.php?r=".$row['id_alternatif']."' class='button' onclick = 'if (! confirm('Yakin akan menghapus data?')) { return false; }' style='background-color: #ff3333' >Hapus</a>
                         </td>";
                         ?>
                     <?php echo "</tr>"; ?>

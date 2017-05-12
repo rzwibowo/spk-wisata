@@ -29,10 +29,12 @@ if (!isset($_SESSION["user"])) echo "<script>location.replace('login.php');</scr
 						<a href="kriteriaShow.php" class="button w70 big" role="button">Kelola Data Kriteria</a>
 					</div>
 					<div class="form-item">
+						<a href="alternatifShow.php" class="button w70 big" role="button">Kelola Data Alternatif</a>
+					</div>
+					<div class="form-item">
 						<a href="logout.php" class="button round outline secondary" role="button">Logout</a>
 					</div>
 				</fieldset>
-				<a href="index.html">Kembali ke Halaman Depan</a>
 			</div>
 		</div>
 
