@@ -8,7 +8,7 @@ include "koneksi.php";
 $id= $_GET['r'];
  
 
-$sqlX = "select * from alternatif where id_alternatif='$id'";
+$sqlX = "select * from alternatif where id_alternatif=$id";
 $hasilX = mysqli_query ($koneksi,$sqlX) or die ("Gagal Akses");
 
 $rowX = mysqli_fetch_assoc($hasilX);

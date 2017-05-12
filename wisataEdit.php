@@ -8,7 +8,7 @@ include "koneksi.php";
 $id= $_GET['r'];
  
 
-$sql = "select * from wisata where id_wisata='$id'";
+$sql = "select * from wisata where id_wisata=$id";
 $hasil = mysqli_query ($koneksi,$sql) or die ("Gagal Akses");
 
 $row = mysqli_fetch_assoc($hasil);
