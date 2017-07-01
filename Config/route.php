@@ -116,6 +116,15 @@ switch ($page) {
     	include "User/userDelete.php";
     	break;
     //end user
+
+    //perhitungan
+    case 'perhitunganInput':
+        include "Perhitungan/input.php";
+        break;
+    case 'perhitunganProses':
+        include "Perhitungan/proses.php";
+        break;
+    //end perhitungan
     default:
      include "Config/menu.php";
 }
