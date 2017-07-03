@@ -5,16 +5,16 @@
 				<fieldset class="text-center">
 					<legend>Menu Admin</legend>
 					<div class="form-item">
-						<a href="index.php?page=wisata_show" class="button w70 big" role="button">Kelola Data Wisata</a>
-					</div>
-					<div class="form-item">
-						<a href="index.php?page=user_show" class="button w70 big" role="button">Kelola Data User</a>
-					</div>
-					<div class="form-item">
 						<a href="index.php?page=kriteria_show" class="button w70 big" role="button">Kelola Data Kriteria</a>
 					</div>
 					<div class="form-item">
 						<a href="index.php?page=alternatif_show" class="button w70 big" role="button">Kelola Data Alternatif</a>
+					</div>
+					<div class="form-item">
+						<a href="index.php?page=wisata_show" class="button w70 big" role="button">Kelola Data Wisata</a>
+					</div>
+					<div class="form-item">
+						<a href="index.php?page=user_show" class="button w70 big" role="button">Kelola Data User</a>
 					</div>
 					<?php
 					  if(isset($_SESSION["user"])){
