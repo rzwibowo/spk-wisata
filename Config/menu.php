@@ -16,6 +16,9 @@
 					<div class="form-item">
 						<a href="index.php?page=user_show" class="button w70 big" role="button">Kelola Data User</a>
 					</div>
+					<div class="form-item">
+						<a href="index.php?page=perhitunganInput" class="button w70 big" role="button">Perhitungan</a>
+					</div>
 					<?php
 					  if(isset($_SESSION["user"])){
 					  	?>
