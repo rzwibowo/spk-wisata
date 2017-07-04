@@ -47,7 +47,7 @@ for ($i=0; $i <$lop; $i++) {
 		echo "<td>".$perbandinganQueue[str_replace(" ","_",$kriteria[$i])][str_replace(" ","_",$kriteria[$i]).$j]."</td>";
 		$jumlah+=$perbandinganQueue[str_replace(" ","_",$kriteria[$j])][str_replace(" ","_",$kriteria[$j]).$i];
 	}
-	$perbandinganQueue['jumlah'][$i]=round($jumlah,2);
+	$perbandinganQueue['jumlah'][$i]=$jumlah;
 	echo "</tr>";
 }
 echo "<tr>"; 
@@ -62,7 +62,7 @@ $lop = count($perbandinganQueue)-1;
 $QueuePrioritas = $perbandinganQueue;
 for ($i=0; $i<$lop; $i++) { 
  	for ($j=0; $j<$lop ; $j++) {
- 	     $QueuePrioritas[str_replace(" ","_",$kriteria[$j])][str_replace(" ","_",$kriteria[$j]).$i]=round($perbandinganQueue[str_replace(" ","_",$kriteria[$j])][str_replace(" ","_",$kriteria[$j]).$i]/$perbandinganQueue['jumlah'][$i],2);
+ 	     $QueuePrioritas[str_replace(" ","_",$kriteria[$j])][str_replace(" ","_",$kriteria[$j]).$i]=$perbandinganQueue[str_replace(" ","_",$kriteria[$j])][str_replace(" ","_",$kriteria[$j]).$i]/$perbandinganQueue['jumlah'][$i];
  	}
  }
 //Set Collum Jumlah dan prioritas
@@ -72,8 +72,8 @@ for ($i=0; $i<$lop; $i++) {
 	for ($j=0; $j<$lop; $j++) { 
 	    $temJum += $QueuePrioritas[str_replace(" ","_",$kriteria[$i])][str_replace(" ","_",$kriteria[$i]).$j]; 
 	}
-	$QueuePrioritas[str_replace(" ","_",$kriteria[$i])][str_replace(" ","_",$kriteria[$i]).$j]=round($temJum,2);
-	$QueuePrioritas[str_replace(" ","_",$kriteria[$i])][str_replace(" ","_",$kriteria[$i]).($j+1)]=round($temJum/$lop,2);
+	$QueuePrioritas[str_replace(" ","_",$kriteria[$i])][str_replace(" ","_",$kriteria[$i]).$j]=$temJum;
+	$QueuePrioritas[str_replace(" ","_",$kriteria[$i])][str_replace(" ","_",$kriteria[$i]).($j+1)]=$temJum/$lop;
 }
 echo "<div class='col-8'>";
 echo "<b>Matrik nilai prioritas</b><br>";
@@ -104,7 +104,7 @@ for ($i=0; $i<$lop; $i++) {
 	 $indexCollum = str_replace(" ","_",$kriteria[$i]);
      $columTarget = count($QueuePrioritas[$indexCollum])-1;
 	for ($j=0; $j<$lop; $j++) {
-	$QueueJumlahBaris[$indexCollum][$indexCollum.$j] = round($perbandinganQueue[$indexCollum][$indexCollum.$j] * $QueuePrioritas[$indexCollum][$indexCollum.$columTarget],2);
+	$QueueJumlahBaris[$indexCollum][$indexCollum.$j] =$perbandinganQueue[$indexCollum][$indexCollum.$j] * $QueuePrioritas[$indexCollum][$indexCollum.$columTarget];
 	}
 }
 //hitung jumlah_baris dan  jum * bobot
@@ -118,13 +118,13 @@ for ($i=0; $i<$lop; $i++) {
 	for ($j=0; $j<$lops; $j++) { 
 		$temJumBaris+=$QueueJumlahBaris[$indexCollum][$indexCollum.$j];
 	}
-	$QueueJumlahBaris[$indexCollum][$indexCollum.$j]= round($temJumBaris,2);
-   $QueueJumlahBaris[$indexCollum][$indexCollum.($j+1)]= round($temJumBaris*$QueuePrioritas[$indexCollum][$indexCollum.$columTarget],2);
-   $JumBobot+=round($temJumBaris*$QueuePrioritas[$indexCollum][$indexCollum.$columTarget],2);
+	$QueueJumlahBaris[$indexCollum][$indexCollum.$j]= $temJumBaris;
+   $QueueJumlahBaris[$indexCollum][$indexCollum.($j+1)]=$temJumBaris*$QueuePrioritas[$indexCollum][$indexCollum.$columTarget];
+   $JumBobot+=$temJumBaris*$QueuePrioritas[$indexCollum][$indexCollum.$columTarget];
 }
 $QueueJumlahBaris['jumlah']=$JumBobot;
 echo "<div class='col-8'>";
-echo "<b>Matrik jumlah baris</b><br>";
+echo "<b>Matrik jumlah baris</b><br><br>";
 echo "<table class='striped'>";
     echo "<tr>";
 	echo "<th>Kriteria</th>";
@@ -220,10 +220,18 @@ function menghitungNilaiPrioritas($perbandinganBerpasanganQueu,$wisata)
   for ($i=1; $i<=$Lop; $i++) {
   	$temJum=0;
   	  for ($j=1; $j<=$Lop; $j++) { 
+  	  	$value = $perbandinganBerpasanganQueu[str_replace(" ","_",$wisata[$j-1])][str_replace(" ","_",$wisata[$j-1]).$i]/$perbandinganBerpasanganQueu['jumlah'][$i];
+  	  	$perbandinganBerpasanganQueu[str_replace(" ","_",$wisata[$j-1])][str_replace(" ","_",$wisata[$j-1]).$i]=$value;
+  	  }
+  	  
+  }
+  for ($i=1; $i<=$Lop; $i++) {
+  	$temJum=0;
+  	  for ($j=1; $j<=$Lop; $j++) { 
   	  	$temJum+=$perbandinganBerpasanganQueu[str_replace(" ","_",$wisata[$i-1])][str_replace(" ","_",$wisata[$i-1].$j)];
   	  }
   	  $perbandinganBerpasanganQueu[str_replace(" ","_",$wisata[$i-1])][str_replace(" ","_",$wisata[$i-1].$j)]=$temJum;
-  	  $perbandinganBerpasanganQueu[str_replace(" ","_",$wisata[$i-1])][str_replace(" ","_",$wisata[$i-1].($j+1))]=round($temJum/$Lop,2);
+  	  $perbandinganBerpasanganQueu[str_replace(" ","_",$wisata[$i-1])][str_replace(" ","_",$wisata[$i-1].($j+1))]=$temJum/$Lop;
   }
 
   tableHeader($wisata);
@@ -252,11 +260,11 @@ function jumlahBaris($QueuePerbandingan, $QueuePrioritas,$wisata){
 		$indexAfterPrioritas = count($QueuePrioritas[$indexQueue]); 
 		$Temjum=0;
 		for ($j=1; $j<=$lops; $j++) { 
-			$QueuePerbandingan[$indexQueue][$indexQueue.$j] =round($QueuePerbandingan[$indexQueue][$indexQueue.$j]*$QueuePrioritas[$indexQueue][$indexQueue.$indexAfterPrioritas],2);
-			$Temjum+=round($QueuePerbandingan[$indexQueue][$indexQueue.$j],2);
+			$QueuePerbandingan[$indexQueue][$indexQueue.$j] =$QueuePerbandingan[$indexQueue][$indexQueue.$j]*$QueuePrioritas[$indexQueue][$indexQueue.$indexAfterPrioritas];
+			$Temjum+=$QueuePerbandingan[$indexQueue][$indexQueue.$j];
 		}
 		$QueuePerbandingan[$indexQueue][$indexQueue.$j] = $Temjum;
-		$QueuePerbandingan[$indexQueue][$indexQueue.($j+1)]=round($Temjum*$QueuePrioritas[$indexQueue][$indexQueue.$indexAfterPrioritas],2);
+		$QueuePerbandingan[$indexQueue][$indexQueue.($j+1)]=$Temjum*$QueuePrioritas[$indexQueue][$indexQueue.$indexAfterPrioritas];
 		$totalBobot+=$QueuePerbandingan[$indexQueue][$indexQueue.($j+1)];
 	}
 	tableHeader($wisata);
@@ -284,8 +292,8 @@ function nilaiCR($jumlahBarisQueue,$prioritasQueue,$kriteria)
 	$maks=0;
 	$tem=0;
 	$count = count($jumlahBarisQueue)-1;
-	echo "Nilai CR";
 	echo "<div class='col-8'>";
+	echo "Nilai CR";
 	echo "<table style='background-color:red' class='striped'>";
 	echo "<tr>";
 		echo "<th>n (jumlah kriteria) </th><th> ".$count."</th>";
@@ -294,14 +302,15 @@ function nilaiCR($jumlahBarisQueue,$prioritasQueue,$kriteria)
 		$indexCollum = str_replace(" ","_",$kriteria[$i]);
 		$indexTargetPrioritas= count($prioritasQueue[$indexCollum])-1; 
 		$indexTargetJumlahBaris = count($jumlahBarisQueue[$indexCollum])-2;
-		$tem += $jumlahBarisQueue[$indexCollum][$indexCollum.$indexTargetJumlahBaris] / $prioritasQueue[$indexCollum][$indexCollum.$indexTargetPrioritas];
+		$tem += round($jumlahBarisQueue[$indexCollum][$indexCollum.$indexTargetJumlahBaris] / $prioritasQueue[$indexCollum][$indexCollum.$indexTargetPrioritas],4);
 		
 	}
-	$maks = ($tem -$count)/($count - 1);
-	$CI =    round($maks/($count-1),2);
-	$CR = 	round($CI/$indexRandom[$count],2);
-	echo "<tr><th>maks</th><th>".round($maks,2)."</th></tr>";
+	$maks =($tem -$count)/($count - 1);
+	$CI =   $maks/($count-1);
+	$CR = 	$CI/$indexRandom[$count];
+	echo "<tr><th>maks</th><th>".$maks."</th></tr>";
 	echo "<tr><th>CI</th><th>".$CI."</th></tr>";
+	echo "<tr><th>Index Rendom</th><th>".$indexRandom[$count]."</th></tr>";
 	echo "<tr><th>CR</th><th>".$CR."</th></tr>";
 	echo "<tr><th></th><th>Nilai CR <= 0.1 Berati Nilai Tersebut Dapat Di Trima</th></tr>";
 	echo "</table></table>";
