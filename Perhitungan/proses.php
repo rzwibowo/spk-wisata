@@ -167,7 +167,7 @@ foreach ($Queue as $key => $value) {
 	$perbandinganBerpasanganQueu[$key]= perbandinganBerpasanganAntarKritetia($Queue[$key],$wisata);
 	$prioritasQueue[$key]=menghitungNilaiPrioritas($perbandinganBerpasanganQueu[$key],$wisata);
 	$jumlahBarisQueue[$key]=jumlahBaris($perbandinganBerpasanganQueu[$key],$prioritasQueue[$key],$wisata);
-    nilaiCR($jumlahBarisQueue[$key],$prioritasQueue[$key],$wisata);
+    nilaiCRPerKriteria($jumlahBarisQueue[$key],$prioritasQueue[$key],$wisata);
     echo "</div>";
 }
 
@@ -319,6 +319,37 @@ function nilaiCR($jumlahBarisQueue,$prioritasQueue,$kriteria)
 	echo "<tr><th></th><th>Nilai CR <= 0.1 Berati Nilai Tersebut Dapat Di Trima</th></tr>";
 	echo "</table></div></div>";
 }
+
+function nilaiCRPerKriteria($jumlahBarisQueue,$prioritasQueue,$kriteria)
+{
+	$indexRandom = array('1'=>0.00,'2'=>0.00,'3'=>0.58,'4'=>0.90,'5'=>1.12,'6'=>1.24,'7'=>1.32,'8'=>1.41,'9'=>1.45,'10'=>1.49,'11'=>1.51,'12'=>1.48,'13'=>1.56,'14'=>1.57,'15'=>1.59);
+	$maks=0;
+	$tem=0;
+	$count = count($jumlahBarisQueue)-1;
+	echo "<div class='col-12'> <div class='text-center'>";
+	echo "<b>Nilai CR</b> </div></div>";
+	echo "<div class='row'><div class='col-12'><table style='background-color:red' class='striped'>";
+	echo "<tr>";
+		echo "<th>n (jumlah kriteria) </th><th> ".$count."</th>";
+	echo "</tr>";
+	for ($i=1; $i<=$count; $i++) { 
+		$indexCollum = str_replace(" ","_",$kriteria[$i-1]);
+		$indexTargetPrioritas= count($prioritasQueue[$indexCollum]); 
+		$indexTargetJumlahBaris = count($jumlahBarisQueue[$indexCollum])-1;
+	    $tem += round($jumlahBarisQueue[$indexCollum][$indexCollum.$indexTargetJumlahBaris] / $prioritasQueue[$indexCollum][$indexCollum.$indexTargetPrioritas],4);
+		
+    }
+	$maks =($tem -$count)/($count - 1);
+	$CI =   $maks/($count-1);
+	$CR = 	$CI/$indexRandom[$count];
+	echo "<tr><th>maks</th><th>".$maks."</th></tr>";
+	echo "<tr><th>CI</th><th>".$CI."</th></tr>";
+	echo "<tr><th>Index Rendom</th><th>".$indexRandom[$count]."</th></tr>";
+	echo "<tr><th>CR</th><th>".$CR."</th></tr>";
+	echo "<tr><th></th><th>Nilai CR <= 0.1 Berati Nilai Tersebut Dapat Di Trima</th></tr>";
+	echo "</table></div></div>";
+}
+
 function tableHeader($wisata){
 	echo "<div><div class='col-12'>";
 	echo "<table class='striped'>";
