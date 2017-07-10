@@ -86,12 +86,16 @@ foreach ($perbandinganTiapKriteria as $key => $value) {
 		echo "<th>".$field."</th>";		
 	}
 	echo "</thed>";
+
 	$jum = count($perbandinganTiapKriteria[$key]);
 	$position = 1;
 	$index = 0;
 	$dataArray = array();
+
+
 	    foreach ($perbandinganTiapKriteria[$key] as $keys => $value) {
 		$Temp = array();
+		
 	    echo "<tr>";
 		echo "<td>".$wisata[$index]."</td>";
 		    	for ($i=1; $i <= $jum; $i++) { 
