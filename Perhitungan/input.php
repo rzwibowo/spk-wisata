@@ -62,71 +62,71 @@ foreach ($dataArray as $key => $value) {
 }
 echo"</table></div>";
 
-// $perbandinganTiapKriteria = array(); 
-// $query = mysqli_query($koneksi,"SELECT nama_wisata FROM wisata");
-// $wisata = array();
+$perbandinganTiapKriteria = array(); 
+$query = mysqli_query($koneksi,"SELECT nama_wisata FROM wisata");
+$wisata = array();
 
-// while ($rs = mysqli_fetch_array($query)) {
-// 	array_push($wisata, $rs['nama_wisata']);
-// }
-// //var_dump($wisata);
-// $queryKriteria = mysqli_query($koneksi,"SELECT nama_kriteria FROM kriteria");
-//  while ($rs = mysqli_fetch_array($queryKriteria)) {   
-//     $krt=$rs['nama_kriteria'];
-//     $perbandinganTiapKriteria[$krt]=$wisata;
-// }
-// $arrayQuue = array();
-// foreach ($perbandinganTiapKriteria as $key => $value) {
-// 	echo "<div class='col-8'><b>Kriteria ".$key."</b><br>";
-// 	echo "<table  class='striped'>";
-// 	echo "<thed>";
-// 	echo "<tr>";
-// 	echo "<th>Kriteria</th>";
-// 	foreach ($wisata as $field) {
-// 		echo "<th>".$field."</th>";		
-// 	}
-// 	echo "</thed>";
+while ($rs = mysqli_fetch_array($query)) {
+	array_push($wisata, $rs['nama_wisata']);
+}
+//var_dump($wisata);
+$queryKriteria = mysqli_query($koneksi,"SELECT nama_kriteria FROM kriteria");
+ while ($rs = mysqli_fetch_array($queryKriteria)) {   
+    $krt=$rs['nama_kriteria'];
+    $perbandinganTiapKriteria[$krt]=$wisata;
+}
+$arrayQuue = array();
+foreach ($perbandinganTiapKriteria as $key => $value) {
+	echo "<div class='col-8'><b>Kriteria ".$key."</b><br>";
+	echo "<table  class='striped'>";
+	echo "<thed>";
+	echo "<tr>";
+	echo "<th>Kriteria</th>";
+	foreach ($wisata as $field) {
+		echo "<th>".$field."</th>";		
+	}
+	echo "</thed>";
 
-// 	$jum = count($perbandinganTiapKriteria[$key]);
-// 	$position = 1;
-// 	$index = 0;
-// 	$dataArray = array();
+	$jum = count($perbandinganTiapKriteria[$key]);
+	$position = 1;
+	$index = 0;
+	$dataArray = array();
 
 
-// 	    foreach ($perbandinganTiapKriteria[$key] as $keys => $value) {
-// 		$Temp = array();
+	    foreach ($perbandinganTiapKriteria[$key] as $keys => $value) {
+		$Temp = array();
 		
-// 	    echo "<tr>";
-// 		echo "<td>".$wisata[$index]."</td>";
-// 		    	for ($i=1; $i <= $jum; $i++) { 
-// 		    		if($i == $position){
-// 		    			$Temp[str_replace(" ", "_", $wisata[$index]).$i]=1;
-// 		    			echo "<td>".$Temp[str_replace(" ", "_", $wisata[$index]).$i]."</td>";
-// 		    		}else{
-// 		    			if($i >= $position){
-// 		    				$Temp[str_replace(" ", "_", $wisata[$index]).$i]="input";
-// 		    				echo "<td><select  name='".$key."[".str_replace(" ", "_", $wisata[$index])."][".str_replace(" ", "_", $wisata[$index]).$i."]'>";
-// 		    				option();
-// 		    				echo "</select></td>";
-// 		    			}else{
-// 		    				$Temp[str_replace(" ", "_", $wisata[$index]).$i]=null;
-// 		    				echo "<td>".$Temp[str_replace(" ", "_", $wisata[$index]).$i]."</td>";
-// 		    		}
+	    echo "<tr>";
+		echo "<td>".$wisata[$index]."</td>";
+		    	for ($i=1; $i <= $jum; $i++) { 
+		    		if($i == $position){
+		    			$Temp[str_replace(" ", "_", $wisata[$index]).$i]=1;
+		    			echo "<td>".$Temp[str_replace(" ", "_", $wisata[$index]).$i]."</td>";
+		    		}else{
+		    			if($i >= $position){
+		    				$Temp[str_replace(" ", "_", $wisata[$index]).$i]="input";
+		    				echo "<td><select  name='".$key."[".str_replace(" ", "_", $wisata[$index])."][".str_replace(" ", "_", $wisata[$index]).$i."]'>";
+		    				option();
+		    				echo "</select></td>";
+		    			}else{
+		    				$Temp[str_replace(" ", "_", $wisata[$index]).$i]=null;
+		    				echo "<td>".$Temp[str_replace(" ", "_", $wisata[$index]).$i]."</td>";
+		    		}
 
-// 		    		}
-// 				}
-// 	            $dataArray[str_replace(" ", "_", $wisata[$index])]=$Temp;
-// 	$position++;
-// 	$index++;
-// 	echo "</tr>";
-// }
-//      $arrayQuue[str_replace(" ", "_", $key)]= $dataArray;
-// 	echo "</table></div>";
-// }
+		    		}
+				}
+	            $dataArray[str_replace(" ", "_", $wisata[$index])]=$Temp;
+	$position++;
+	$index++;
+	echo "</tr>";
+}
+     $arrayQuue[str_replace(" ", "_", $key)]= $dataArray;
+	echo "</table></div>";
+}
 
- //$_SESSION['Queue']= $arrayQuue;
+ $_SESSION['Queue']= $arrayQuue;
  $_SESSION['kriteria']= $kriteria;
-// $_SESSION['wisata']= $wisata;
+$_SESSION['wisata']= $wisata;
 
 echo "<div class='col-8'><button type='submit' name='submit' value='perhitunganProses' class='button upper' id='kirim'>Hitung</div>";
 echo "</form>";
