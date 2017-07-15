@@ -149,27 +149,27 @@ nilaiCR($QueueJumlahBaris,$QueuePrioritas,$kriteria);
 
 echo "</div>";
 
-$Queue =$_SESSION['Queue'];
-$wisata = $_SESSION['wisata'];
+//$Queue =$_SESSION['Queue'];
+//$wisata = $_SESSION['wisata'];
 
-$i= 0;
-foreach ($Queue as $key=>$values) {
-	$Queue[$key] = setInputInArray($Queue[$key],$_POST[str_replace(" ", "_", $key)],$wisata);
-	$i++;
-}
-$perbandinganBerpasanganQueu=$Queue;
-$prioritasQueue=$Queue;
-$jumlahBarisQueue=$Queue;
+// $i= 0;
+// foreach ($Queue as $key=>$values) {
+// 	$Queue[$key] = setInputInArray($Queue[$key],$_POST[str_replace(" ", "_", $key)],$wisata);
+// 	$i++;
+// }
+// $perbandinganBerpasanganQueu=$Queue;
+// $prioritasQueue=$Queue;
+// $jumlahBarisQueue=$Queue;
 
-foreach ($Queue as $key => $value) {
-	echo "<br><br><div class='row align-center'>";
-	echo"<div class='col-12'> <div class='text-center'><h1>Kriteria ".str_replace("_"," ",$key)."</h1></div></div>";
-	$perbandinganBerpasanganQueu[$key]= perbandinganBerpasanganAntarKritetia($Queue[$key],$wisata);
-	$prioritasQueue[$key]=menghitungNilaiPrioritas($perbandinganBerpasanganQueu[$key],$wisata);
-	$jumlahBarisQueue[$key]=jumlahBaris($perbandinganBerpasanganQueu[$key],$prioritasQueue[$key],$wisata);
-    nilaiCRPerKriteria($jumlahBarisQueue[$key],$prioritasQueue[$key],$wisata);
-    echo "</div>";
-}
+// foreach ($Queue as $key => $value) {
+// 	echo "<br><br><div class='row align-center'>";
+// 	echo"<div class='col-12'> <div class='text-center'><h1>Kriteria ".str_replace("_"," ",$key)."</h1></div></div>";
+// 	$perbandinganBerpasanganQueu[$key]= perbandinganBerpasanganAntarKritetia($Queue[$key],$wisata);
+// 	$prioritasQueue[$key]=menghitungNilaiPrioritas($perbandinganBerpasanganQueu[$key],$wisata);
+// 	$jumlahBarisQueue[$key]=jumlahBaris($perbandinganBerpasanganQueu[$key],$prioritasQueue[$key],$wisata);
+//     nilaiCRPerKriteria($jumlahBarisQueue[$key],$prioritasQueue[$key],$wisata);
+//     echo "</div>";
+// }
 
 //function
 function setInputInArray($Queue,$POST,$wisata){
@@ -296,6 +296,7 @@ function nilaiCR($jumlahBarisQueue,$prioritasQueue,$kriteria)
 	$maks=0;
 	$tem=0;
 	$count = count($jumlahBarisQueue)-1;
+    $jumKriteria = count($kriteria);
 	echo "<div class='col-12'> <div class='text-center'>";
 	echo "<b>Nilai CR</b> </div></div>";
 	echo "<div class='row'><div class='col-12'><table style='background-color:red' class='striped'>";
@@ -307,12 +308,13 @@ function nilaiCR($jumlahBarisQueue,$prioritasQueue,$kriteria)
 		$indexTargetPrioritas= count($prioritasQueue[$indexCollum])-1; 
 		$indexTargetJumlahBaris = count($jumlahBarisQueue[$indexCollum])-2;
 		$tem += round($jumlahBarisQueue[$indexCollum][$indexCollum.$indexTargetJumlahBaris] / $prioritasQueue[$indexCollum][$indexCollum.$indexTargetPrioritas],4);
-		
 	}
-	$maks =($tem -$count)/($count - 1);
-	$CI =   $maks/($count-1);
+	//echo $tem;
+	$nilaimax = round($tem/$jumKriteria,4);
+	//echo $nilaimax;
+	$CI =($nilaimax -$jumKriteria)/($jumKriteria - 1);
 	$CR = 	$CI/$indexRandom[$count];
-	echo "<tr><th>maks</th><th>".$maks."</th></tr>";
+	echo "<tr><th>maks</th><th>".$nilaimax."</th></tr>";
 	echo "<tr><th>CI</th><th>".$CI."</th></tr>";
 	echo "<tr><th>Index Rendom</th><th>".$indexRandom[$count]."</th></tr>";
 	echo "<tr><th>CR</th><th>".$CR."</th></tr>";
@@ -364,41 +366,41 @@ function tableHeader($wisata){
 
 
 //Nilai Akhir    	<div class="row align-center">
- echo "<div class='col-12'>";
-    			echo "<div class'text-center'>";
-    				echo "<h1>Hasil Akhir</h1>";
-    				echo "<br>";
-    			echo "</div>";
-	echo "<div><div class='col-12'>";
-	echo "<table class='striped' border=1>";
-    echo "<tr>";
-	echo "<th> </th>";
-	foreach ($kriteria as $key => $value) {
-	   echo "<th>".$value."</th>";
-	}
-	echo "<th>Total</th></tr>";
-	$lop =count($QueuePrioritas)-1;
-	echo "<tr>";
-	echo "<td></td>";
-	for ($i=0; $i < $lop; $i++) { 
-			$indexQueuePrioritas =count($QueuePrioritas[str_replace(" ","_",$kriteria[$i])])-1; 
-			echo "<td>".$QueuePrioritas[str_replace(" ","_",$kriteria[$i])][str_replace(" ","_",$kriteria[$i]).$indexQueuePrioritas]."</td>";
-	}
-	echo "<td></td></tr>";
+ // echo "<div class='col-12'>";
+ //    			echo "<div class'text-center'>";
+ //    				echo "<h1>Hasil Akhir</h1>";
+ //    				echo "<br>";
+ //    			echo "</div>";
+	// echo "<div><div class='col-12'>";
+	// echo "<table class='striped' border=1>";
+ //    echo "<tr>";
+	// echo "<th> </th>";
+	// foreach ($kriteria as $key => $value) {
+	//    echo "<th>".$value."</th>";
+	// }
+	// echo "<th>Total</th></tr>";
+	// $lop =count($QueuePrioritas)-1;
+	// echo "<tr>";
+	// echo "<td></td>";
+	// for ($i=0; $i < $lop; $i++) { 
+	// 		$indexQueuePrioritas =count($QueuePrioritas[str_replace(" ","_",$kriteria[$i])])-1; 
+	// 		echo "<td>".$QueuePrioritas[str_replace(" ","_",$kriteria[$i])][str_replace(" ","_",$kriteria[$i]).$indexQueuePrioritas]."</td>";
+	// }
+	// echo "<td></td></tr>";
 
 
-	foreach ($wisata as $key => $value) {
-		echo "<tr><td>".$value."</td>";
-			for ($i=0; $i < $lop; $i++) { 
-				$tem = 0;
-				$index = count($prioritasQueue[str_replace(" ","_",$kriteria[$i])][str_replace(" ","_",$value)]);
-				$tem +=$prioritasQueue[str_replace(" ","_",$kriteria[$i])][str_replace(" ","_",$value)][str_replace(" ","_",$value.$index)] * $QueuePrioritas[str_replace(" ","_",$kriteria[$i])][str_replace(" ","_",$kriteria[$i]).$indexQueuePrioritas]; 
-		     echo "<td>".$prioritasQueue[str_replace(" ","_",$kriteria[$i])][str_replace(" ","_",$value)][str_replace(" ","_",$value).$index]."</td>";
-			}
-		echo "<td style='text-align:right'>".$tem."</td></tr>";
-	}
-		echo "</table></div></div>";
-	echo "</div>";
+	// foreach ($wisata as $key => $value) {
+	// 	echo "<tr><td>".$value."</td>";
+	// 		for ($i=0; $i < $lop; $i++) { 
+	// 			$tem = 0;
+	// 			$index = count($prioritasQueue[str_replace(" ","_",$kriteria[$i])][str_replace(" ","_",$value)]);
+	// 			$tem +=$prioritasQueue[str_replace(" ","_",$kriteria[$i])][str_replace(" ","_",$value)][str_replace(" ","_",$value.$index)] * $QueuePrioritas[str_replace(" ","_",$kriteria[$i])][str_replace(" ","_",$kriteria[$i]).$indexQueuePrioritas]; 
+	// 	     echo "<td>".$prioritasQueue[str_replace(" ","_",$kriteria[$i])][str_replace(" ","_",$value)][str_replace(" ","_",$value).$index]."</td>";
+	// 		}
+	// 	echo "<td style='text-align:right'>".$tem."</td></tr>";
+	// }
+	// 	echo "</table></div></div>";
+	// echo "</div>";
 	
 //end Nilai Akhir
 ?>
