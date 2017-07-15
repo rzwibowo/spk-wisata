@@ -63,7 +63,7 @@ $lop = count($perbandinganQueue)-1;
 $QueuePrioritas = $perbandinganQueue;
 for ($i=0; $i<$lop; $i++) { 
  	for ($j=0; $j<$lop ; $j++) {
- 	     $QueuePrioritas[str_replace(" ","_",$kriteria[$j])][str_replace(" ","_",$kriteria[$j]).$i]=$perbandinganQueue[str_replace(" ","_",$kriteria[$j])][str_replace(" ","_",$kriteria[$j]).$i]/$perbandinganQueue['jumlah'][$i];
+ 	     $QueuePrioritas[str_replace(" ","_",$kriteria[$j])][str_replace(" ","_",$kriteria[$j]).$i]=round($perbandinganQueue[str_replace(" ","_",$kriteria[$j])][str_replace(" ","_",$kriteria[$j]).$i]/$perbandinganQueue['jumlah'][$i],2);
  	}
  }
 //Set Collum Jumlah dan prioritas
@@ -73,8 +73,8 @@ for ($i=0; $i<$lop; $i++) {
 	for ($j=0; $j<$lop; $j++) { 
 	    $temJum += $QueuePrioritas[str_replace(" ","_",$kriteria[$i])][str_replace(" ","_",$kriteria[$i]).$j]; 
 	}
-	$QueuePrioritas[str_replace(" ","_",$kriteria[$i])][str_replace(" ","_",$kriteria[$i]).$j]=$temJum;
-	$QueuePrioritas[str_replace(" ","_",$kriteria[$i])][str_replace(" ","_",$kriteria[$i]).($j+1)]=$temJum/$lop;
+	$QueuePrioritas[str_replace(" ","_",$kriteria[$i])][str_replace(" ","_",$kriteria[$i]).$j]=round($temJum,2);
+	$QueuePrioritas[str_replace(" ","_",$kriteria[$i])][str_replace(" ","_",$kriteria[$i]).($j+1)]=round($temJum/$lop,2);
 }
 echo "<div class='col-12'> <div class='text-center'>";
 echo "<b>2. Matrik nilai prioritas</div></div></b><br><br>";
@@ -308,6 +308,8 @@ function nilaiCR($jumlahBarisQueue,$prioritasQueue,$kriteria)
 		$indexTargetPrioritas= count($prioritasQueue[$indexCollum])-1; 
 		$indexTargetJumlahBaris = count($jumlahBarisQueue[$indexCollum])-2;
 		$tem += round($jumlahBarisQueue[$indexCollum][$indexCollum.$indexTargetJumlahBaris] / $prioritasQueue[$indexCollum][$indexCollum.$indexTargetPrioritas],4);
+		echo round($jumlahBarisQueue[$indexCollum][$indexCollum.$indexTargetJumlahBaris] / $prioritasQueue[$indexCollum][$indexCollum.$indexTargetPrioritas],4)."</br></br>";
+		 // echo $tem."</br></br>";
 	}
 	//echo $tem;
 	$nilaimax = round($tem/$jumKriteria,4);
