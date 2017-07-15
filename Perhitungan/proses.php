@@ -299,7 +299,7 @@ function nilaiCR($jumlahBarisQueue,$prioritasQueue,$kriteria)
 		$indexCollum = str_replace(" ","_",$kriteria[$i]);
 		$indexTargetPrioritas= count($prioritasQueue[$indexCollum])-1; 
 		$indexTargetJumlahBaris = count($jumlahBarisQueue[$indexCollum])-1;
-		$tem += round($jumlahBarisQueue[$indexCollum][$indexCollum.$indexTargetJumlahBaris] / $prioritasQueue[$indexCollum][$indexCollum.$indexTargetPrioritas],4);
+		$tem += round($jumlahBarisQueue[$indexCollum][$indexCollum.$indexTargetJumlahBaris] * $prioritasQueue[$indexCollum][$indexCollum.$indexTargetPrioritas],4);
 	}
 	//end lamda max
 	echo "<div class='col-12'> <div class='text-center'>";
@@ -330,7 +330,7 @@ function nilaiCRPerKriteria($jumlahBarisQueue,$prioritasQueue,$kriteria)
 		$indexCollum = str_replace(" ","_",$kriteria[$i-1]);
 		$indexTargetPrioritas= count($prioritasQueue[$indexCollum]); 
 		$indexTargetJumlahBaris = count($jumlahBarisQueue[$indexCollum]);
-	    $tem += round($jumlahBarisQueue[$indexCollum][$indexCollum.$indexTargetJumlahBaris] / $prioritasQueue[$indexCollum][$indexCollum.$indexTargetPrioritas],4);
+	    $tem += round($jumlahBarisQueue[$indexCollum][$indexCollum.$indexTargetJumlahBaris] * $prioritasQueue[$indexCollum][$indexCollum.$indexTargetPrioritas],4);
 		
     }
     echo "<div class='col-12'> <div class='text-center'>";
