@@ -105,10 +105,11 @@ for ($i=0; $i<$lop; $i++) {
 	 $indexCollum = str_replace(" ","_",$kriteria[$i]);
      $columTarget = count($QueuePrioritas[$indexCollum])-1;
 	for ($j=0; $j<$lop; $j++) {
-	$QueueJumlahBaris[$indexCollum][$indexCollum.$j] =$perbandinganQueue[$indexCollum][$indexCollum.$j] * $QueuePrioritas[$indexCollum][$indexCollum.$columTarget];
+		$QueueJumlahBaris[$indexCollum][$indexCollum.$j] = round($perbandinganQueue[$indexCollum][$indexCollum.$j] * $QueuePrioritas[str_replace(" ","_",$kriteria[$j])][str_replace(" ","_",$kriteria[$j]).$columTarget],2);
 	}
+
 }
-//hitung jumlah_baris dan  jum * bobot
+//hitung jumlah_baris 
 $lop= count($QueueJumlahBaris)-1;
 $JumBobot =0;
 for ($i=0; $i<$lop; $i++) { 
@@ -120,10 +121,7 @@ for ($i=0; $i<$lop; $i++) {
 		$temJumBaris+=$QueueJumlahBaris[$indexCollum][$indexCollum.$j];
 	}
 	$QueueJumlahBaris[$indexCollum][$indexCollum.$j]= $temJumBaris;
-   $QueueJumlahBaris[$indexCollum][$indexCollum.($j+1)]=$temJumBaris*$QueuePrioritas[$indexCollum][$indexCollum.$columTarget];
-   $JumBobot+=$temJumBaris*$QueuePrioritas[$indexCollum][$indexCollum.$columTarget];
 }
-$QueueJumlahBaris['jumlah']=$JumBobot;
 echo "<div class='col-12'> <div class='text-center'>";
 echo "<b>3. Matrik jumlah baris</b></div></div><br><br>";
 echo "<div class='row'><div class='col-12'><table class='striped'>";
@@ -132,7 +130,7 @@ echo "<div class='row'><div class='col-12'><table class='striped'>";
 foreach ($kriteria as $key => $value) {
     echo "<th>".$value."</th>";    
 }
-echo "<th>jumlah_baris</th><th>Jumlah * Bobot</th>";
+echo "<th>jumlah_baris</th>";
 echo "</tr>";
 for ($i=0; $i<$lop; $i++) { 
 	echo "<tr>";
@@ -143,7 +141,6 @@ for ($i=0; $i<$lop; $i++) {
         echo "<td>".$QueueJumlahBaris[$indexCollum][$indexCollum.$j]."</td>";
 	}
 }
-echo "<tr><td colspan='".$lops."' align='center'><b>Jumlah</b></td><td><b>".$QueueJumlahBaris['jumlah']."</b></td></tr>";
 echo "</table></div></div>";
 nilaiCR($QueueJumlahBaris,$QueuePrioritas,$kriteria);
 
@@ -297,21 +294,32 @@ function nilaiCR($jumlahBarisQueue,$prioritasQueue,$kriteria)
 	$tem=0;
 	$count = count($jumlahBarisQueue)-1;
     $jumKriteria = count($kriteria);
+    //set lamda max table
+	echo "<div class='col-12'> <div class='text-center'>";
+	echo "<b>Lamda Max</b> </div></div>";
+	echo "<div class='row'><div class='col-12'><table style= class='striped'>";
+	
+	for ($i=0; $i<$count ; $i++) { 
+			echo "<tr>";
+		$indexCollum = str_replace(" ","_",$kriteria[$i]);
+		echo "<td>".$indexCollum."</td>";
+		$indexTargetPrioritas= count($prioritasQueue[$indexCollum])-1; 
+		$indexTargetJumlahBaris = count($jumlahBarisQueue[$indexCollum])-1;
+		$tem += round($jumlahBarisQueue[$indexCollum][$indexCollum.$indexTargetJumlahBaris] / $prioritasQueue[$indexCollum][$indexCollum.$indexTargetPrioritas],4);
+		    echo "<td>".$jumlahBarisQueue[$indexCollum][$indexCollum.$indexTargetJumlahBaris] ." / ". $prioritasQueue[$indexCollum][$indexCollum.$indexTargetPrioritas] ." = <b>".round($jumlahBarisQueue[$indexCollum][$indexCollum.$indexTargetJumlahBaris] / $prioritasQueue[$indexCollum][$indexCollum.$indexTargetPrioritas],4)."</b></td>";
+			echo "</tr>";
+	}
+	echo "<tr><td>Jumlah</td><td>".$tem." / ".$jumKriteria." = <b>".round($tem/$jumKriteria,4)."</b></td></tr>";
+
+	//end lamda max
+	echo "</table></div></div>";
+	//echo $tem;
 	echo "<div class='col-12'> <div class='text-center'>";
 	echo "<b>Nilai CR</b> </div></div>";
 	echo "<div class='row'><div class='col-12'><table style='background-color:red' class='striped'>";
 	echo "<tr>";
 		echo "<th>n (jumlah kriteria) </th><th> ".$count."</th>";
 	echo "</tr>";
-	for ($i=0; $i<$count ; $i++) { 
-		$indexCollum = str_replace(" ","_",$kriteria[$i]);
-		$indexTargetPrioritas= count($prioritasQueue[$indexCollum])-1; 
-		$indexTargetJumlahBaris = count($jumlahBarisQueue[$indexCollum])-2;
-		$tem += round($jumlahBarisQueue[$indexCollum][$indexCollum.$indexTargetJumlahBaris] / $prioritasQueue[$indexCollum][$indexCollum.$indexTargetPrioritas],4);
-		echo round($jumlahBarisQueue[$indexCollum][$indexCollum.$indexTargetJumlahBaris] / $prioritasQueue[$indexCollum][$indexCollum.$indexTargetPrioritas],4)."</br></br>";
-		 // echo $tem."</br></br>";
-	}
-	//echo $tem;
 	$nilaimax = round($tem/$jumKriteria,4);
 	//echo $nilaimax;
 	$CI =($nilaimax -$jumKriteria)/($jumKriteria - 1);
