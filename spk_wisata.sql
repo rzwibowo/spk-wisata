@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 09, 2017 at 04:39 PM
+-- Generation Time: Jul 16, 2017 at 03:25 AM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 7.0.16
 
@@ -46,6 +46,16 @@ CREATE TABLE `kriteria` (
   `nama_kriteria` varchar(30) NOT NULL,
   `prioritas_kriteria` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `kriteria`
+--
+
+INSERT INTO `kriteria` (`kriteria_id`, `nama_kriteria`, `prioritas_kriteria`) VALUES
+(4, 'fasilitas', '0.00'),
+(5, 'jum_pengunjung', '0.00'),
+(6, 'transportasi', '0.00'),
+(7, 'infrastruktur', '0.00');
 
 -- --------------------------------------------------------
 
@@ -102,7 +112,14 @@ CREATE TABLE `wisata` (
 --
 
 INSERT INTO `wisata` (`id_wisata`, `nama_wisata`, `alamat`, `keterangan`, `fasilitas`, `jml_pengunjung`, `transportasi`, `infrastruktur`) VALUES
-(1, 'New York', 'aa', 'aaaaaaaaaaaaa', '3', '2', '0', '1');
+(3, 'Pantai Lamsat', 'x', 'y', '5', '3', '1', '0'),
+(4, 'Tugu Libra', 'x', 'y', '1', '2', '2', '1'),
+(5, 'Patung hati Kudus Ye', 'y', 'x', '2', '2', '1', '1'),
+(6, 'TN Wasur', 'x', 'y', '3', '3', '2', '2'),
+(7, 'Danau Rawa Biru', 'i', 'j', '1', '1', '2', '2'),
+(8, 'Tugu Perbatasan Saba', 'p', 'p', '3', '3', '0', '0'),
+(9, 'Lotus Garden', 'ww', 'ww', '1', '1', '2', '2'),
+(10, 'Sentra jagung', 'oo', 'oo', '2', '3', '0', '1');
 
 --
 -- Indexes for dumped tables
@@ -149,12 +166,12 @@ ALTER TABLE `wisata`
 -- AUTO_INCREMENT for table `alternatif`
 --
 ALTER TABLE `alternatif`
-  MODIFY `id_alternatif` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_alternatif` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `kriteria`
 --
 ALTER TABLE `kriteria`
-  MODIFY `kriteria_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `kriteria_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `subkriteria`
 --
@@ -164,12 +181,12 @@ ALTER TABLE `subkriteria`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `wisata`
 --
 ALTER TABLE `wisata`
-  MODIFY `id_wisata` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_wisata` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- Constraints for dumped tables
 --
@@ -178,7 +195,7 @@ ALTER TABLE `wisata`
 -- Constraints for table `alternatif`
 --
 ALTER TABLE `alternatif`
-  ADD CONSTRAINT `alternatif_ibfk_1` FOREIGN KEY (`id_wisata`) REFERENCES `wisata` (`id_wisata`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `alternatif_ibfk_1` FOREIGN KEY (`id_wisata`) REFERENCES `wisata` (`id_wisata`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `subkriteria`
