@@ -1,21 +1,31 @@
-    <div id="main">
-    	<div class="row align-center">
-    		<div class="col-6">
-    			<div class="text-center">
-    				<h1>Input Data Untuk Di Hitung</h1>
-    				
-    			</div>
-    		</div>
+    <div id="main" style=" margin: 10px 20px 10px 20px;">
+    <!-- form input -->
+    <form method='POST' action='index.php'>
+    <div class="row"><h1 style="text-align:center">INPUT DATA</h1></div>
+    <div class="row" style="background-color: #28B8DB">
+ 			<nav class="tabs" data-component="tabs">
+             <ul>
+        		<li class="active"><a href="#bobotKriteria">Bobot Kriteria</a></li>
+        		<?php
+        			$queryKriteria = mysqli_query($koneksi,"SELECT nama_kriteria FROM kriteria");
+					$kriteria = array();
+					 while ($rs = mysqli_fetch_array($queryKriteria)) {
+					 	array_push($kriteria, $rs['nama_kriteria']);
+					}
+					foreach ($kriteria as $key => $value) {
+						echo "<li><a href='#".str_replace(" ","_",$value)."'>".$value."</a></li>";
+					}
+        		?>
+   			 </ul>
+			</nav>
+	</div>
+
+     <!-- end tabs -->
 <?php
-$queryKriteria = mysqli_query($koneksi,"SELECT nama_kriteria FROM kriteria");
-$kriteria = array();
- while ($rs = mysqli_fetch_array($queryKriteria)) {
- 	array_push($kriteria, $rs['nama_kriteria']);
-}
-echo "<div class='col-8'>";
-echo "<b>Matrik nilai perbandingan berpasangan antar kriteria</b><br><br>";
-echo "<form method='POST' action='index.php'>";
-echo "<table  class='striped'>";
+echo "<div class='row align-center' id='bobotKriteria' style=' background-color:#6EB8B5'>";
+echo "<div class='col col-8'>";
+echo "<br><h4 style='text-align:center'>Bobot Kriteria</h4>";
+echo "<table  class='bordered'>";
 echo "<thed>";
 echo "<tr>";
 echo "<th>Kriteria</th>";
@@ -60,7 +70,7 @@ foreach ($dataArray as $key => $value) {
         	}
         echo "</tr>";
 }
-echo"</table></div>";
+echo"</table></div></div>";
 
 $perbandinganTiapKriteria = array(); 
 $query = mysqli_query($koneksi,"SELECT nama_wisata FROM wisata");
@@ -76,16 +86,21 @@ $queryKriteria = mysqli_query($koneksi,"SELECT nama_kriteria FROM kriteria");
     $perbandinganTiapKriteria[$krt]=$wisata;
 }
 $arrayQuue = array();
+$count = count($perbandinganTiapKriteria);
+$lops = 0;
+$no =1;
 foreach ($perbandinganTiapKriteria as $key => $value) {
-	echo "<div class='col-8'><b>Kriteria ".$key."</b><br>";
-	echo "<table  class='striped'>";
+	echo "<div class='row align-center' style=' background-color:#6EB8B5' id='".str_replace(" ","_",$key)."'>";
+	echo "<div class='col col-8'>";
+	echo "<br><h4 style='text-align:center'>".($no).". Kriteria ".$key."</h4>";
+	echo "<table  class='bordered'>";
 	echo "<thed>";
 	echo "<tr>";
 	echo "<th>Kriteria</th>";
 	foreach ($wisata as $field) {
 		echo "<th>".$field."</th>";		
 	}
-	echo "</thed>";
+	echo "</tr></thed>";
 
 	$jum = count($perbandinganTiapKriteria[$key]);
 	$position = 1;
@@ -120,16 +135,22 @@ foreach ($perbandinganTiapKriteria as $key => $value) {
 	$index++;
 	echo "</tr>";
 }
+	$no++;
      $arrayQuue[str_replace(" ", "_", $key)]= $dataArray;
+     $lops ++;
+     if($lops == $count){
 	echo "</table></div>";
+		echo "<div class='col col-8' style='text-align:right'><button type='submit' name='submit' value='perhitunganProses' class='button upper' id='kirim' style='margin-bottom:5px' >Hitung</div></div>";
+	}else
+	{
+		echo "</table></div></div>";
+	}
 }
 
  $_SESSION['Queue']= $arrayQuue;
  $_SESSION['kriteria']= $kriteria;
 $_SESSION['wisata']= $wisata;
 
-echo "<div class='col-8'><button type='submit' name='submit' value='perhitunganProses' class='button upper' id='kirim'>Hitung</div>";
-echo "</form>";
 function option(){
 	echo "<option>-Pilih-</option>";
 	for ($i=1; $i<=9; $i++) {
@@ -137,5 +158,6 @@ function option(){
 	}
 }
 ?>
-</div>
+</form>
+<!-- end form input -->
 </div>
