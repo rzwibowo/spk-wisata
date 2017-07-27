@@ -12,7 +12,7 @@ include "Config/koneksi.php";
 
     <!-- Kube CSS -->
     <link rel="stylesheet" href="Asset/css/kube.css">
-     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="Asset/js/kube.js"></script>
 </head>
 <body>

@@ -1,3 +1,4 @@
+    <?php include "kepala.php"; ?>
 <?php 
 
 $id= $_GET['r'];

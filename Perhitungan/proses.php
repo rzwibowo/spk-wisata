@@ -1,4 +1,6 @@
-    <div id="main"  style=" margin: 10px 20px 10px 20px;background-color:#6EB8B5">
+     <?php include "kepala.php"; ?>
+  
+   <div id="main"  style=" margin: 10px 20px 10px 20px;background-color:#6EB8B5">
     	<div class="row" style="background-color: #28B8DB">
     		<nav class="tabs" data-component="tabs">
              <ul>

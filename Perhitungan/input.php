@@ -1,7 +1,10 @@
-    <div id="main" style=" margin: 10px 20px 10px 20px;">
+	    <?php include "kepala.php"; ?>
+
+	<div id="main" style=" margin: 10px 20px 10px 20px;">
     <!-- form input -->
     <form method='POST' action='index.php'>
     <div class="row"><h1 style="text-align:center">INPUT DATA</h1></div>
+	
     <div class="row" style="background-color: #28B8DB">
  			<nav class="tabs" data-component="tabs">
              <ul>
@@ -26,7 +29,7 @@ echo "<div class='row align-center' id='bobotKriteria' style=' background-color:
 echo "<div class='col col-8'>";
 echo "<br><h4 style='text-align:center'>Bobot Kriteria</h4>";
 echo "<table  class='bordered'>";
-echo "<thed>";
+echo "<thead>";
 echo "<tr>";
 echo "<th>Kriteria</th>";
 $dataArray = array();
@@ -54,7 +57,7 @@ $_SESSION['All']= $dataArray;
 foreach ($kriteria as $key => $value) {
 		echo "<th>".$value."</th>";
 }
-echo "</tr>";
+echo "</tr></thead><tbody>";
 
 foreach ($dataArray as $key => $value) {
         echo "<tr>";
@@ -70,7 +73,7 @@ foreach ($dataArray as $key => $value) {
         	}
         echo "</tr>";
 }
-echo"</table></div></div>";
+echo"</tbody></table></div></div>";
 
 $perbandinganTiapKriteria = array(); 
 $query = mysqli_query($koneksi,"SELECT nama_wisata FROM wisata");
@@ -94,13 +97,13 @@ foreach ($perbandinganTiapKriteria as $key => $value) {
 	echo "<div class='col col-8'>";
 	echo "<br><h4 style='text-align:center'>".($no).". Kriteria ".$key."</h4>";
 	echo "<table  class='bordered'>";
-	echo "<thed>";
+	echo "<thead>";
 	echo "<tr>";
 	echo "<th>Kriteria</th>";
 	foreach ($wisata as $field) {
 		echo "<th>".$field."</th>";		
 	}
-	echo "</tr></thed>";
+	echo "</tr></thead><tbody>";
 
 	$jum = count($perbandinganTiapKriteria[$key]);
 	$position = 1;
@@ -143,7 +146,7 @@ foreach ($perbandinganTiapKriteria as $key => $value) {
 		echo "<div class='col col-8' style='text-align:right'><button type='submit' name='submit' value='perhitunganProses' class='button upper' id='kirim' style='margin-bottom:5px' >Hitung</div></div>";
 	}else
 	{
-		echo "</table></div></div>";
+		echo "</tbody></table></div></div>";
 	}
 }
 
