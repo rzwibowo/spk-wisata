@@ -11,10 +11,12 @@
 			<div class="tab">
 				<span class="tablinks active" onclick="openCity(event, 'BobotKrt')">Bobot Kriteria</span>
 				<?php
-					$queryKriteria = mysqli_query($koneksi,"SELECT nama_kriteria FROM kriteria");
+					$queryKriteria = mysqli_query($koneksi,"SELECT nama_kriteria,kriteria_id FROM kriteria");
 					$kriteria = array();
+					$kriteri_id = array();
 						while ($rs = mysqli_fetch_array($queryKriteria)) {
 						array_push($kriteria, $rs['nama_kriteria']);
+						array_push($kriteri_id,$rs['kriteria_id']);
 					}
 					foreach ($kriteria as $key => $value) {
 						echo '<span class="tablinks" onclick="openCity(event,\''.str_replace(" ","_",$value).'\')">'.$value.'</span>';
@@ -147,21 +149,22 @@
 					$no++;
 					$arrayQuue[str_replace(" ", "_", $key)]= $dataArray;
 					$lops ++;
+					echo "</tbody></table>";
 					if($lops == $count){
-						echo "</tbody></table></div>";
-						echo "<div class='col-12' style='text-align:right'><button type='submit' name='submit' value='perhitunganProses' class='button upper' id='kirim' style='margin-bottom:5px' >Hitung</div></div>";
-					}else
-					{
-						echo "</tbody></table></div>";
+
+						// echo "</tbody></table></div>";
+						 echo "<div class='col-12' style='text-align:right'><button type='submit' name='submit' value='perhitunganProses' class='button upper' id='kirim' style='margin-bottom:5px' >Hitung</div></div>";
 					}
+						echo "</div>";
+					
 				}
 
 				$_SESSION['Queue']= $arrayQuue;
 				$_SESSION['kriteria']= $kriteria;
+				$_SESSION['id_kriteria']=$kriteri_id;
 				$_SESSION['wisata']= $wisata;
 
 				function option(){
-					echo "<option>-Pilih-</option>";
 					for ($i=1; $i<=9; $i++) {
 					echo "<option value='".$i."'>".$i."</option>";
 					}

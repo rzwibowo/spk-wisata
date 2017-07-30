@@ -44,11 +44,6 @@ $rowX = mysqli_fetch_assoc($hasilX);
                             <input type="month" name="periode" class="w50" id="periode" value=<?php echo "\"".$rowX['periode']."\"" ?>>
                             <div id="message-periode" style="margin-top: 5px;"></div>
                         </div>
-                        <div class="form-item">
-                            <label for="global">Global</label>
-                            <input type="number" name="global" class="w20" id="global" step="0.01" min="0" value=<?php echo "\"".$rowX['global']."\"" ?>>
-                            <div id="message-global" style="margin-top: 5px;"></div>
-                        </div>
                         <div class="row between">
                             <button type="reset" class="button secondary outline w15">Reset</button>
                             <button type="submit" name="submit" value="AlternatifUpdate" class="button upper" id="kirim">Simpan</button>

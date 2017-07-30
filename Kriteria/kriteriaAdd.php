@@ -14,12 +14,6 @@
     						<input type="text" name="nama_kriteria" class="w50" id="nama_kriteria">
                             <div id="message-nama_kriteria" style="margin-top: 5px;"></div>
     					</div>
-                        <div class="form-item">
-                            <label for="prioritas_kriteria">Prioritas</label>
-                            <input type="number" name="prioritas_kriteria" class="w20" id="prioritas_kriteria" step="0.01" min="0">
-                            <div id="message-prioritas_kriteria" style="margin-top: 5px;"></div>
-                        </div>
-    					
     					<div class="row between">
     						<button type="reset" class="button secondary outline w15">Reset</button>
     						<button type="submit" name="submit" value="KriteriaSave" class="button upper" id="kirim">Simpan</button>

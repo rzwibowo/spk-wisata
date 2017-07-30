@@ -3,9 +3,8 @@
 
 $id_wisata=$_POST['nama_wisata'];
 $periode=$_POST['periode'];
-$global=$_POST['global'];
 
-$queryInsert="INSERT INTO alternatif(id_wisata,periode,global) VALUES(".$id_wisata.",'".$periode."',".$global.")"; 
+$queryInsert="INSERT INTO alternatif(id_wisata,periode) VALUES(".$id_wisata.",'".$periode."')"; 
 $query=mysqli_query($koneksi,$queryInsert);
 
 if($query){

@@ -27,11 +27,6 @@ $row = mysqli_fetch_assoc($hasil);
                             <input type="text" name="nama_kriteria" class="w50" id="nama_kriteria" value="<?php echo $row['nama_kriteria']?>">
                               <div id="message-nama_kriteria" style="margin-top: 5px;"></div>
                         </div>
-                        <div class="form-item">
-                            <label for="prioritas_kriteria">Prioritas</label>
-                            <input type="number" name="prioritas_kriteria" class="w50" id="prioritas_kriteria" value="<?php echo $row['prioritas_kriteria']?>" step="0.01" min="0">
-                            <div id="message-prioritas_kriteria" style="margin-top: 5px;"></div>
-                        </div>
                         <div class="row between">
                             <button type="reset" class="button secondary outline w15">Reset</button>
                             <button type="submit" name="submit" value="kriteriaUpdate" class="button upper" id="kirim">Simpan</button>

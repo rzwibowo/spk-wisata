@@ -7,6 +7,7 @@
         		<li class="active"><a href="#bobotKriteria">Bobot Kriteria</a></li>
         		<?php
         		 $kriteria=$_SESSION['kriteria'];
+        		 $id_kriteria = $_SESSION['id_kriteria'];
 				 foreach ($kriteria as $key => $value) {
 						echo "<li><a href='#".str_replace(" ","_",$value)."'>".$value."</a></li>";
 					}
@@ -88,6 +89,7 @@ for ($i=0; $i<$lop; $i++) {
 	}
 	$QueuePrioritas[str_replace(" ","_",$kriteria[$i])][str_replace(" ","_",$kriteria[$i]).$j]=round($temJum,2);
 	$QueuePrioritas[str_replace(" ","_",$kriteria[$i])][str_replace(" ","_",$kriteria[$i]).($j+1)]=round($temJum/$lop,2);
+	UpdateNilaiPrioritas($koneksi,"kriteria",$id_kriteria[$i],$QueuePrioritas[str_replace(" ","_",$kriteria[$i])][str_replace(" ","_",$kriteria[$i]).($j+1)],"prioritas_kriteria","kriteria_id");
 }
 
 echo "<br><br> <h4>2. Tabel matrik untuk menghitung nilai prioritas</h4>";
@@ -320,7 +322,85 @@ function jumlahBaris($QueuePerbandingan, $QueuePrioritas,$wisata){
     return $QueuePerbandingan;
 
 }
-function nilaiCR($jumlahBarisQueue,$prioritasQueue,$kriteria)
+
+//Nilai Akhir  	
+echo "<div class='row align-center'  style=' background-color:#6EB8B5'  id='nilaiAkhir' >";
+ echo "<div class='col col-8' style='text-align:center'>";
+    	    		echo "<h1>Hasil Akhir</h1>";
+    				echo "<br>";
+	echo "<div class='col-12'>";
+	echo "<table class='bordered'>";
+    echo "<tr>";
+	echo "<th> </th>";
+	foreach ($kriteria as $key => $value) {
+	   echo "<th>".$value."</th>";
+	}
+	echo "<th>Bobot Prioritas Global</th></tr>";
+	$lop =count($QueuePrioritas)-1;
+	echo "<tr>";
+	echo "<td></td>";
+	for ($i=0; $i < $lop; $i++) { 
+			$indexQueuePrioritas =count($QueuePrioritas[str_replace(" ","_",$kriteria[$i])])-1; 
+			echo "<td>".$QueuePrioritas[str_replace(" ","_",$kriteria[$i])][str_replace(" ","_",$kriteria[$i]).$indexQueuePrioritas]."</td>";
+	}
+	echo "<td></td></tr>";
+	$wisataTertingi = "";
+    $nilaiTertinggi = 0;
+    $indexwisata =0;
+    $nilaiPrioritas = 0;
+    $hasilKali =0;
+	foreach ($wisata as $key => $value) {
+		$date = date("d F Y ");
+		$query="INSERT INTO alternatif(alternatif) VALUES('".$value."')"; 
+	    $query=mysqli_query($koneksi,$query);
+	    	if($query){
+		   $sql ="SELECT * FROM alternatif ORDER BY id_alternatif  DESC LIMIT 1";
+		   $result = mysqli_query($koneksi,$sql);
+		   $dataId = mysqli_fetch_assoc($result);
+		   $idalternatif = $dataId['id_alternatif'];
+		   }
+			$tem = 0;
+		echo "<tr><td>".$value."</td>";
+			for ($i=0; $i < $lop; $i++) { 
+				$index = count($prioritasQueue[str_replace(" ","_",$kriteria[$i])][str_replace(" ","_",$value)]);
+				   $hasilKali = $prioritasQueue[str_replace(" ","_",$kriteria[$i])][str_replace(" ","_",$value)][str_replace(" ","_",$value.$index)] * $QueuePrioritas[str_replace(" ","_",$kriteria[$i])][str_replace(" ","_",$kriteria[$i]).$indexQueuePrioritas];
+				    $tem += $hasilKali;
+					$nilaiPrioritas =$prioritasQueue[str_replace(" ","_",$kriteria[$i])][str_replace(" ","_",$value)][str_replace(" ","_",$value).$index];
+				    
+				    $queryInsertSubkriteria="INSERT INTO subkriteria(kriteria_id,id_alternatif,prioritas_subkriteria,perkalian) VALUES(".$id_kriteria[$i].",".$idalternatif.",".$nilaiPrioritas.",".$hasilKali.")"; 
+	    			mysqli_query($koneksi,$queryInsertSubkriteria);
+
+		     echo "<td>".$nilaiPrioritas."</td>";
+		     if($nilaiTertinggi == 0 && $wisataTertingi ==" ")
+		     {
+		     	$nilaiTertinggi = round($tem,2);
+		     	$wisataTertingi = $value;
+		     }else
+		     {
+		     	if($tem > $nilaiTertinggi)
+		     	{
+		     		$nilaiTertinggi = round($tem,2);
+		     		$wisataTertingi = $value;
+		     	}
+		     }
+			}
+		echo "<td style='text-align:right'>".round($tem,2)."</td></tr>";
+		$indexwisata++;
+
+	    $queryUpdate="UPDATE alternatif set prioritas_global='round($tem,2)' WHERE id_alternatif=$idalternatif"; 
+        mysqli_query($koneksi,$queryUpdate)or die(mysqli_error($koneksi));
+		
+	}
+		echo "</table></div></div> <br>";
+		echo "Kesimpulan : Yang memiliki nilai tertinggi adalah ".$wisataTertingi." dengan nilai ".$nilaiTertinggi;
+	echo "<br><br></div>";
+	
+//end Nilai Akhir
+
+
+//function
+
+	function nilaiCR($jumlahBarisQueue,$prioritasQueue,$kriteria)
 {
     $jumKriteria = count($kriteria);
     $nilaiIndexRandom = GetNilaiRandom(round($jumlahBarisQueue['jumlah']));
@@ -376,57 +456,17 @@ function GetNilaiRandom($nilai){
 	$indexRandom = array('1'=>0.00,'2'=>0.00,'3'=>0.58,'4'=>0.90,'5'=>1.12,'6'=>1.24,'7'=>1.32,'8'=>1.41,'9'=>1.45,'10'=>1.49,'11'=>1.51,'12'=>1.48,'13'=>1.56,'14'=>1.57,'15'=>1.59);
 	return $indexRandom[$nilai];
 }
-//end funtion
 
-//Nilai Akhir  	
-echo "<div class='row align-center'  style=' background-color:#6EB8B5'  id='nilaiAkhir' >";
- echo "<div class='col col-8' style='text-align:center'>";
-    	    		echo "<h1>Hasil Akhir</h1>";
-    				echo "<br>";
-	echo "<div class='col-12'>";
-	echo "<table class='bordered'>";
-    echo "<tr>";
-	echo "<th> </th>";
-	foreach ($kriteria as $key => $value) {
-	   echo "<th>".$value."</th>";
-	}
-	echo "<th>Bobot Prioritas Global</th></tr>";
-	$lop =count($QueuePrioritas)-1;
-	echo "<tr>";
-	echo "<td></td>";
-	for ($i=0; $i < $lop; $i++) { 
-			$indexQueuePrioritas =count($QueuePrioritas[str_replace(" ","_",$kriteria[$i])])-1; 
-			echo "<td>".$QueuePrioritas[str_replace(" ","_",$kriteria[$i])][str_replace(" ","_",$kriteria[$i]).$indexQueuePrioritas]."</td>";
-	}
-	echo "<td></td></tr>";
-	$wisataTertingi = "";
-    $nilaiTertinggi = 0;
-	foreach ($wisata as $key => $value) {
-			$tem = 0;
-		echo "<tr><td>".$value."</td>";
-			for ($i=0; $i < $lop; $i++) { 
-				$index = count($prioritasQueue[str_replace(" ","_",$kriteria[$i])][str_replace(" ","_",$value)]);
-				$tem +=$prioritasQueue[str_replace(" ","_",$kriteria[$i])][str_replace(" ","_",$value)][str_replace(" ","_",$value.$index)] * $QueuePrioritas[str_replace(" ","_",$kriteria[$i])][str_replace(" ","_",$kriteria[$i]).$indexQueuePrioritas]; 
-		     echo "<td>".$prioritasQueue[str_replace(" ","_",$kriteria[$i])][str_replace(" ","_",$value)][str_replace(" ","_",$value).$index]."</td>";
-		     if($nilaiTertinggi == 0 && $wisataTertingi ==" ")
-		     {
-		     	$nilaiTertinggi = round($tem,2);
-		     	$wisataTertingi = $value;
-		     }else
-		     {
-		     	if($tem > $nilaiTertinggi)
-		     	{
-		     		$nilaiTertinggi = round($tem,2);
-		     		$wisataTertingi = $value;
-		     	}
-		     }
-			}
-		echo "<td style='text-align:right'>".round($tem,2)."</td></tr>";
-	}
-		echo "</table></div></div> <br>";
-		echo "Kesimpulan : Yang memiliki nilai tertinggi adalah ".$wisataTertingi." dengan nilai ".$nilaiTertinggi;
-	echo "<br><br></div>";
-	
-//end Nilai Akhir
+function UpdateNilaiPrioritas($koneksi,$table,$kode,$nilai,$fieldnilai,$fieldKode)
+{
+	$queryUpdate="UPDATE ".$table." set ".$fieldnilai."='".$nilai."' WHERE ".$fieldKode."=".$kode.""; 
+$query=mysqli_query($koneksi,$queryUpdate)or die(mysqli_error($koneksi));
+
+// if(!$query)
+// {
+// 	echo "Berhasil";
+// }
+}
+//end funtion
 ?>
 </div>

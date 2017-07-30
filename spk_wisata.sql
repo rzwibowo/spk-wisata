@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
+-- version 4.7.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 16, 2017 at 03:25 AM
--- Server version: 10.1.21-MariaDB
--- PHP Version: 7.0.16
+-- Generation Time: 30 Jul 2017 pada 17.40
+-- Versi Server: 10.1.24-MariaDB
+-- PHP Version: 7.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -19,26 +21,36 @@ SET time_zone = "+00:00";
 --
 -- Database: `spk_wisata`
 --
-CREATE DATABASE IF NOT EXISTS `spk_wisata` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `spk_wisata`;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `alternatif`
+-- Struktur dari tabel `alternatif`
 --
 
 CREATE TABLE `alternatif` (
   `id_alternatif` int(11) NOT NULL,
-  `id_wisata` int(11) NOT NULL,
   `periode` varchar(30) NOT NULL,
-  `global` decimal(10,2) NOT NULL
+  `prioritas_global` decimal(10,2) NOT NULL,
+  `alternatif` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `kriteria`
+-- Struktur dari tabel `detail_kriteria`
+--
+
+CREATE TABLE `detail_kriteria` (
+  `id_detail_kriteria` int(11) NOT NULL,
+  `id_kriteria` int(11) NOT NULL,
+  `id_wisata` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `kriteria`
 --
 
 CREATE TABLE `kriteria` (
@@ -48,19 +60,19 @@ CREATE TABLE `kriteria` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `kriteria`
+-- Dumping data untuk tabel `kriteria`
 --
 
 INSERT INTO `kriteria` (`kriteria_id`, `nama_kriteria`, `prioritas_kriteria`) VALUES
-(4, 'fasilitas', '0.00'),
-(5, 'jum_pengunjung', '0.00'),
-(6, 'transportasi', '0.00'),
-(7, 'infrastruktur', '0.00');
+(7, 'Fasilitas', '0.40'),
+(8, 'Jumlah_Pengunjung', '0.27'),
+(9, 'Transportasi', '0.22'),
+(10, 'Inprastruktur', '0.11');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `subkriteria`
+-- Struktur dari tabel `subkriteria`
 --
 
 CREATE TABLE `subkriteria` (
@@ -74,7 +86,7 @@ CREATE TABLE `subkriteria` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Struktur dari tabel `user`
 --
 
 CREATE TABLE `user` (
@@ -84,7 +96,7 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `user`
+-- Dumping data untuk tabel `user`
 --
 
 INSERT INTO `user` (`user_id`, `username`, `password`) VALUES
@@ -93,33 +105,29 @@ INSERT INTO `user` (`user_id`, `username`, `password`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `wisata`
+-- Struktur dari tabel `wisata`
 --
 
 CREATE TABLE `wisata` (
   `id_wisata` int(11) NOT NULL,
   `nama_wisata` varchar(20) NOT NULL,
   `alamat` varchar(30) NOT NULL,
-  `keterangan` text NOT NULL,
-  `fasilitas` varchar(1) NOT NULL,
-  `jml_pengunjung` varchar(1) NOT NULL,
-  `transportasi` varchar(1) NOT NULL,
-  `infrastruktur` varchar(1) NOT NULL
+  `keterangan` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `wisata`
+-- Dumping data untuk tabel `wisata`
 --
 
-INSERT INTO `wisata` (`id_wisata`, `nama_wisata`, `alamat`, `keterangan`, `fasilitas`, `jml_pengunjung`, `transportasi`, `infrastruktur`) VALUES
-(3, 'Pantai Lamsat', 'x', 'y', '5', '3', '1', '0'),
-(4, 'Tugu Libra', 'x', 'y', '1', '2', '2', '1'),
-(5, 'Patung hati Kudus Ye', 'y', 'x', '2', '2', '1', '1'),
-(6, 'TN Wasur', 'x', 'y', '3', '3', '2', '2'),
-(7, 'Danau Rawa Biru', 'i', 'j', '1', '1', '2', '2'),
-(8, 'Tugu Perbatasan Saba', 'p', 'p', '3', '3', '0', '0'),
-(9, 'Lotus Garden', 'ww', 'ww', '1', '1', '2', '2'),
-(10, 'Sentra jagung', 'oo', 'oo', '2', '3', '0', '1');
+INSERT INTO `wisata` (`id_wisata`, `nama_wisata`, `alamat`, `keterangan`) VALUES
+(3, 'Pantai Lamsat', 'x', 'y'),
+(4, 'Tugu Libra', 'x', 'y'),
+(5, 'Patung hati Kudus Ye', 'y', 'x'),
+(6, 'TN Wasur', 'x', 'y'),
+(7, 'Danau Rawa Biru', 'i', 'j'),
+(8, 'Tugu Perbatasan Saba', 'p', 'p'),
+(9, 'Lotus Garden', 'ww', 'ww'),
+(10, 'Sentra jagung', 'oo', 'oo');
 
 --
 -- Indexes for dumped tables
@@ -129,7 +137,14 @@ INSERT INTO `wisata` (`id_wisata`, `nama_wisata`, `alamat`, `keterangan`, `fasil
 -- Indexes for table `alternatif`
 --
 ALTER TABLE `alternatif`
-  ADD PRIMARY KEY (`id_alternatif`),
+  ADD PRIMARY KEY (`id_alternatif`);
+
+--
+-- Indexes for table `detail_kriteria`
+--
+ALTER TABLE `detail_kriteria`
+  ADD PRIMARY KEY (`id_detail_kriteria`),
+  ADD KEY `id_kriteria` (`id_kriteria`),
   ADD KEY `id_wisata` (`id_wisata`);
 
 --
@@ -166,17 +181,17 @@ ALTER TABLE `wisata`
 -- AUTO_INCREMENT for table `alternatif`
 --
 ALTER TABLE `alternatif`
-  MODIFY `id_alternatif` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_alternatif` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 --
 -- AUTO_INCREMENT for table `kriteria`
 --
 ALTER TABLE `kriteria`
-  MODIFY `kriteria_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `kriteria_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `subkriteria`
 --
 ALTER TABLE `subkriteria`
-  MODIFY `subkriteria_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `subkriteria_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 --
 -- AUTO_INCREMENT for table `user`
 --
@@ -188,21 +203,23 @@ ALTER TABLE `user`
 ALTER TABLE `wisata`
   MODIFY `id_wisata` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
--- Constraints for dumped tables
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
 --
--- Constraints for table `alternatif`
+-- Ketidakleluasaan untuk tabel `detail_kriteria`
 --
-ALTER TABLE `alternatif`
-  ADD CONSTRAINT `alternatif_ibfk_1` FOREIGN KEY (`id_wisata`) REFERENCES `wisata` (`id_wisata`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `detail_kriteria`
+  ADD CONSTRAINT `detail_kriteria_ibfk_1` FOREIGN KEY (`id_wisata`) REFERENCES `wisata` (`id_wisata`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `detail_kriteria_ibfk_2` FOREIGN KEY (`id_kriteria`) REFERENCES `kriteria` (`kriteria_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `subkriteria`
+-- Ketidakleluasaan untuk tabel `subkriteria`
 --
 ALTER TABLE `subkriteria`
   ADD CONSTRAINT `subkriteria_ibfk_1` FOREIGN KEY (`kriteria_id`) REFERENCES `kriteria` (`kriteria_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `subkriteria_ibfk_2` FOREIGN KEY (`id_alternatif`) REFERENCES `alternatif` (`id_alternatif`) ON DELETE NO ACTION ON UPDATE CASCADE;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -18,10 +18,6 @@
                         <th>Nama Wisata</th>
                         <th>Alamat</th>
                         <th>Keterangan</th>
-                        <th>Fasilitas</th>
-                        <th>Jml Pengunjung</th>
-                        <th>Transportasi</th>
-                        <th>Infrastruktur</th>
                         <th>Operasi</th>
                     </tr>
                 </thead>
@@ -39,10 +35,6 @@
                         <?php echo "<td>".$row['nama_wisata']."</td>";?>
                         <?php echo "<td>".$row['alamat']."</td>";?>
                         <?php echo "<td>".$row['keterangan']."</td>";?>
-                        <?php echo "<td>".$row['fasilitas']."</td>";?>
-                        <?php echo "<td>".$row['jml_pengunjung']."</td>";?>
-                        <?php echo "<td>".$row['transportasi']."</td>";?>
-                        <?php echo "<td>".$row['infrastruktur']."</td>";?>
                         <?php echo
                         "<td>
                         <a href='index.php?r=".$row['id_wisata']."&page=WisataEdit' class='button'>Edit</a>
