@@ -408,7 +408,7 @@ echo "<div class='row align-center'  style=' background-color:#6EB8B5'  id='nila
 {
     $jumKriteria = count($kriteria);
     $CR = 0;
-    $nilaiIndexRandom = GetNilaiRandom(round($jumlahBarisQueue['jumlah']));
+    $nilaiIndexRandom = GetNilaiRandom(floor($jumlahBarisQueue['jumlah']));
 	echo "<div class='col-12'> <div class='text-center'>";
 	echo "<br><br><h4>Nilai CR</h4> </div></div>";
 	echo "<div class='row'><div class='col-12'><table style='background-color:#DB1C58' class='bordered'>";
@@ -438,7 +438,7 @@ function nilaiCRPerKriteria($jumlahBarisQueue,$prioritasQueue,$wisata)
 	$maks=0;
 	$CR =0;
 	$count = count($wisata);
-	$nilaiIndexRandom = GetNilaiRandom(round($jumlahBarisQueue['jumlah'])); 
+	$nilaiIndexRandom = GetNilaiRandom(floor($jumlahBarisQueue['jumlah'])); 
 	echo "<b>Nilai CR</b>";
 	echo "<table class='bordered' style='background-color:#DB1C58'>";
 	echo "<tr>";
