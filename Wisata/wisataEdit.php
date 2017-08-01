@@ -1,13 +1,11 @@
     <?php include "kepala.php"; ?>
 <?php 
 
-
 $id= $_GET['r'];
- 
-
-$sql = "select * from wisata where id_wisata=$id";
+ echo $id;
+$sql = "select * from wisata where id_wisata='$id'";
 $hasil = mysqli_query ($koneksi,$sql) or die ("Gagal Akses");
-echo $hasil;
+
 $row = mysqli_fetch_assoc($hasil);
 ?>
 
@@ -21,9 +19,9 @@ $row = mysqli_fetch_assoc($hasil);
                 <form class="form" action="index.php" method="POST" name="form-kirim">
                     <fieldset>
                         <input type="hidden" name="id_wisata" class="w50" id="id_wisata" value="<?php echo $row['id_wisata']?>">
-                        <input type="hidden" name="id_wisata" class="w50" id="fasilitas" value="<?php echo $row['fasilitas']?>">
+                        <input type="hidden" name="fasilitas" class="w50" id="fasilitas" value="<?php echo $row['fasilitas']?>">
                         <input type="hidden" name="jml_pengunjung" class="w50" id="jml_pengunjung" value="<?php echo $row['jml_pengunjung']?>">
-                        <input type="hidden" name="transportasi class="w50" id="transportasi" value="<?php echo $row['transportasi']?>">
+                        <input type="hidden" name="transportasi" class="w50" id="transportasi" value="<?php echo $row['transportasi']?>">
                         <input type="hidden" name="infrastruktur" class="w50" id="infrastruktur" value="<?php echo $row['infrastruktur']?>">
                         <div class="form-item">
                             <label for="nama_wisata">Nama Wisata</label>
