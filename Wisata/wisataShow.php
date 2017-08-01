@@ -30,6 +30,7 @@
                 $sql = "select * from wisata";
                 $hasil = mysqli_query ($koneksi,$sql) or die ("Gagal Akses");
 
+                $no=1;
                 while ($row = mysqli_fetch_array ($hasil)){
                 
                 $fasilitas="";
@@ -121,7 +122,6 @@
                         break;
                 }
 
-                $no=1;
                 ?>
                     <?php "<tr>"; ?>
                         <?php echo "<td>".$no.". </td>"; ?> 
