@@ -27,33 +27,33 @@
                         </div>
                         <div class="form-item">
                             <label for="fasilitas">Fasilitas</label>
-                            <input type="radio" name="fasilitas" value="1"> 1 &nbsp;
-                            <input type="radio" name="fasilitas" value="2"> 2 &nbsp;
-                            <input type="radio" name="fasilitas" value="3"> 3 &nbsp;
-                            <input type="radio" name="fasilitas" value="4"> 4 &nbsp;
-                            <input type="radio" name="fasilitas" value="5"> 5 &nbsp;
+                            <input type="radio" name="fasilitas" value="1"> Sangat Kurang Lengkap <br>
+                            <input type="radio" name="fasilitas" value="2"> Kurang Lengkap <br>
+                            <input type="radio" name="fasilitas" value="3"> Cukup Lengkap <br>
+                            <input type="radio" name="fasilitas" value="4"> Lengkap <br>
+                            <input type="radio" name="fasilitas" value="5"> Sangat Lengkap <br>
                             <div id="message-fasilitas" style="margin-top: 5px;"></div>
                         </div>
                         <div class="form-item">
                             <label for="jml_pengunjung">Jumlah Pengunjung</label>
-                            <input type="radio" name="jml_pengunjung" value="1"> 1 &nbsp;
-                            <input type="radio" name="jml_pengunjung" value="2"> 2 &nbsp;
-                            <input type="radio" name="jml_pengunjung" value="3"> 3 &nbsp;
+                            <input type="radio" name="jml_pengunjung" value="1"> 1 < 50 Tidak Banyak <br>
+                            <input type="radio" name="jml_pengunjung" value="2"> 50 - 100 Banyak <br>
+                            <input type="radio" name="jml_pengunjung" value="3"> > 100 Sangat Banyak 
                             <div id="message-jml_pengunjung" style="margin-top: 5px;"></div>
                         </div>
                         <div class="form-item">
                             <label for="transportasi">Transportasi</label>
-                            <input type="radio" name="transportasi" value="1"> 1 &nbsp;
-                            <input type="radio" name="transportasi" value="2"> 2 &nbsp;
-                            <input type="radio" name="transportasi" value="3"> 3 &nbsp;
+                            <input type="radio" name="transportasi" value="1"> Tidak Tersedia <br>
+                            <input type="radio" name="transportasi" value="2"> Tersedia <br>
+                            <input type="radio" name="transportasi" value="3"> Dilewati 
                             <div id="message-transportasi" style="margin-top: 5px;"></div>
                         </div>
                         <div class="form-item">
                             <label for="infrastruktur">Infrastruktur</label>
-                            <input type="radio" name="infrastruktur" value="1"> 1 &nbsp;
-                            <input type="radio" name="infrastruktur" value="2"> 2 &nbsp;
-                            <input type="radio" name="infrastruktur" value="3"> 3 &nbsp;
-                            <input type="radio" name="infrastruktur" value="4"> 4 &nbsp;
+                            <input type="radio" name="infrastruktur" value="1"> Tidak Ada <br>
+                            <input type="radio" name="infrastruktur" value="2"> Ada Salah Satu <br>
+                            <input type="radio" name="infrastruktur" value="3"> Ada Salah Dua <br>
+                            <input type="radio" name="infrastruktur" value="4"> Ada Salah Tiga
                             <div id="message-infrastruktur" style="margin-top: 5px;"></div>
                         </div>
     					<div class="row between">
