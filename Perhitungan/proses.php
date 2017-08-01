@@ -407,6 +407,7 @@ echo "<div class='row align-center'  style=' background-color:#6EB8B5'  id='nila
 	function nilaiCR($jumlahBarisQueue,$prioritasQueue,$kriteria)
 {
     $jumKriteria = count($kriteria);
+    $CR = 0;
     $nilaiIndexRandom = GetNilaiRandom(round($jumlahBarisQueue['jumlah']));
 	echo "<div class='col-12'> <div class='text-center'>";
 	echo "<br><br><h4>Nilai CR</h4> </div></div>";
@@ -417,7 +418,13 @@ echo "<div class='row align-center'  style=' background-color:#6EB8B5'  id='nila
 	$nilaimax = round($jumlahBarisQueue['jumlah']/$jumKriteria,4);
 	//echo $nilaimax;
 	$CI = round(($nilaimax -$jumKriteria)/($jumKriteria - 1),2);
-	$CR = 	round($CI/$nilaiIndexRandom,2);
+	$NilaiCR = @($CI/$nilaiIndexRandom);
+	if($NilaiCR === -INF ||  $NilaiCR === INF)
+	{
+		$CR ="<h2>∞ (Nilai Tak Terhingga)</h2>";
+	}else{
+	    $CR  = round($NilaiCR,2);
+	}
 	echo "<tr><th>maks</th><th>".$nilaimax."</th></tr>";
 	echo "<tr><th>CI</th><th>".$CI."</th></tr>";
 	echo "<tr><th>Index Rendom</th><th>".$nilaiIndexRandom."</th></tr>";
@@ -429,6 +436,7 @@ echo "<div class='row align-center'  style=' background-color:#6EB8B5'  id='nila
 function nilaiCRPerKriteria($jumlahBarisQueue,$prioritasQueue,$wisata)
 {
 	$maks=0;
+	$CR =0;
 	$count = count($wisata);
 	$nilaiIndexRandom = GetNilaiRandom(round($jumlahBarisQueue['jumlah'])); 
 	echo "<b>Nilai CR</b>";
@@ -438,7 +446,15 @@ function nilaiCRPerKriteria($jumlahBarisQueue,$prioritasQueue,$wisata)
 	echo "</tr>";
   	$maks = round($jumlahBarisQueue['jumlah']/$count,2);
     $CI =round(($maks-$count)/($count - 1),2);
-	$CR = 	round($CI/$nilaiIndexRandom,2);
+
+    $NilaiCR = @($CI/$nilaiIndexRandom);
+	if($NilaiCR === -INF ||  $NilaiCR === INF)
+	{
+		$CR ="<h2>∞ (Nilai Tak Terhingga)</h2>";
+	}else{
+	    $CR  = round($NilaiCR,2);
+	}
+
 	echo "<tr><th>maks</th><th>".$maks."</th></tr>";
 	echo "<tr><th>CI</th><th>".$CI."</th></tr>";
 	echo "<tr><th>Index Rendom</th><th>".$nilaiIndexRandom."</th></tr>";
@@ -463,7 +479,6 @@ function GetNilaiRandom($nilai){
 
 function UpdateNilaiPrioritas($koneksi,$table,$kode,$nilai,$fieldnilai,$fieldKode)
 {
-	echo $fieldKode;
 	$queryUpdate="UPDATE ".$table." set ".$fieldnilai."='".$nilai."' WHERE ".$fieldKode."='".$kode."'"; 
 $query=mysqli_query($koneksi,$queryUpdate)or die(mysqli_error($koneksi));
 

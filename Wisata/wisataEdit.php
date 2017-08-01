@@ -2,7 +2,6 @@
 <?php 
 
 $id= $_GET['r'];
- echo $id;
 $sql = "select * from wisata where id_wisata='$id'";
 $hasil = mysqli_query ($koneksi,$sql) or die ("Gagal Akses");
 
