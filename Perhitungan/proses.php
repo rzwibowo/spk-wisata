@@ -369,9 +369,15 @@ echo "<div class='row align-center'  style=' background-color:#6EB8B5'  id='nila
 				   $hasilKali = $prioritasQueue[str_replace(" ","_",$kriteria[$i])][str_replace(" ","_",$value)][str_replace(" ","_",$value.$index)] * $QueuePrioritas[str_replace(" ","_",$kriteria[$i])][str_replace(" ","_",$kriteria[$i]).$indexQueuePrioritas];
 				    $tem += $hasilKali;
 					$nilaiPrioritas =$prioritasQueue[str_replace(" ","_",$kriteria[$i])][str_replace(" ","_",$value)][str_replace(" ","_",$value).$index];
+
 				    $kodeSubkritetia = GenerateId("subkriteria","subkriteria_id",null,"S",$koneksi);
-				   $queryInsertSubkriteria="INSERT INTO subkriteria(subkriteria_id,kriteria_id,id_alternatif,prioritas_subkriteria,perkalian) VALUES('".$kodeSubkritetia."',".$id_kriteria[$i].",".$idalternatif.",".$nilaiPrioritas.",".$hasilKali.")"; 
-	    			mysqli_query($koneksi,$queryInsertSubkriteria);
+
+				   $queryInsertSubkriteria="INSERT INTO subkriteria(subkriteria_id,kriteria_id,id_alternatif,prioritas_subkriteria,perkalian) VALUES('".$kodeSubkritetia."','".$id_kriteria[$i]."','".$idalternatif."',".$nilaiPrioritas.",".$hasilKali.")"; 
+
+	    			$result =mysqli_query($koneksi,$queryInsertSubkriteria);
+	    			if(!$result){
+	    				mysqli_error($koneksi);
+	    			}
 
 		     echo "<td>".$nilaiPrioritas."</td>";
 		     if($nilaiTertinggi == 0 && $wisataTertingi ==" ")
