@@ -353,8 +353,7 @@ echo "<div class='row align-center'  style=' background-color:#6EB8B5'  id='nila
 	foreach ($wisata as $key => $value) {
 		$date = date("d F Y ");
 		$kodeAlternatif = GenerateId("alternatif","id_alternatif",null,'A',$koneksi);
-		echo $kodeAlternatif;
-		$queryInsert="INSERT INTO alternatif(id_alternatif,alternatif) VALUES('$kodeAlternatif','$value')"; 
+		$queryInsert="INSERT INTO alternatif(id_alternatif,periode,alternatif) VALUES('$kodeAlternatif','$date','$value')"; 
 	    $query=mysqli_query($koneksi,$queryInsert);
 	    	if($query){
 
