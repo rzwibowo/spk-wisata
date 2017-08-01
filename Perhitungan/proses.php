@@ -349,15 +349,19 @@ echo "<div class='row align-center'  style=' background-color:#6EB8B5'  id='nila
     $indexwisata =0;
     $nilaiPrioritas = 0;
     $hasilKali =0;
+    $idalternatif=0;
 	foreach ($wisata as $key => $value) {
 		$date = date("d F Y ");
-		$query="INSERT INTO alternatif(alternatif) VALUES('".$value."')"; 
-	    $query=mysqli_query($koneksi,$query);
+		$kodeAlternatif = GenerateId("alternatif","id_alternatif",null,'A',$koneksi);
+		echo $kodeAlternatif;
+		$queryInsert="INSERT INTO alternatif(id_alternatif,alternatif) VALUES('$kodeAlternatif','$value')"; 
+	    $query=mysqli_query($koneksi,$queryInsert);
 	    	if($query){
-		   $sql ="SELECT * FROM alternatif ORDER BY id_alternatif  DESC LIMIT 1";
-		   $result = mysqli_query($koneksi,$sql);
-		   $dataId = mysqli_fetch_assoc($result);
-		   $idalternatif = $dataId['id_alternatif'];
+
+		  $sql ="SELECT * FROM alternatif ORDER BY id_alternatif  DESC LIMIT 1";
+		  $result = mysqli_query($koneksi,$sql);
+		  $dataId = mysqli_fetch_assoc($result);
+		  $idalternatif = $dataId['id_alternatif'];
 		   }
 			$tem = 0;
 		echo "<tr><td>".$value."</td>";
@@ -366,8 +370,8 @@ echo "<div class='row align-center'  style=' background-color:#6EB8B5'  id='nila
 				   $hasilKali = $prioritasQueue[str_replace(" ","_",$kriteria[$i])][str_replace(" ","_",$value)][str_replace(" ","_",$value.$index)] * $QueuePrioritas[str_replace(" ","_",$kriteria[$i])][str_replace(" ","_",$kriteria[$i]).$indexQueuePrioritas];
 				    $tem += $hasilKali;
 					$nilaiPrioritas =$prioritasQueue[str_replace(" ","_",$kriteria[$i])][str_replace(" ","_",$value)][str_replace(" ","_",$value).$index];
-				    
-				    $queryInsertSubkriteria="INSERT INTO subkriteria(kriteria_id,id_alternatif,prioritas_subkriteria,perkalian) VALUES(".$id_kriteria[$i].",".$idalternatif.",".$nilaiPrioritas.",".$hasilKali.")"; 
+				    $kodeSubkritetia = GenerateId("subkriteria","subkriteria_id",null,"S",$koneksi);
+				   $queryInsertSubkriteria="INSERT INTO subkriteria(subkriteria_id,kriteria_id,id_alternatif,prioritas_subkriteria,perkalian) VALUES('".$kodeSubkritetia."',".$id_kriteria[$i].",".$idalternatif.",".$nilaiPrioritas.",".$hasilKali.")"; 
 	    			mysqli_query($koneksi,$queryInsertSubkriteria);
 
 		     echo "<td>".$nilaiPrioritas."</td>";
@@ -386,9 +390,10 @@ echo "<div class='row align-center'  style=' background-color:#6EB8B5'  id='nila
 			}
 		echo "<td style='text-align:right'>".round($tem,2)."</td></tr>";
 		$indexwisata++;
+		$NilaiGlobal = round($tem,2);
 
-	    $queryUpdate="UPDATE alternatif set prioritas_global='round($tem,2)' WHERE id_alternatif=$idalternatif"; 
-        mysqli_query($koneksi,$queryUpdate)or die(mysqli_error($koneksi));
+	   $queryUpdate="UPDATE alternatif set prioritas_global='$NilaiGlobal' WHERE id_alternatif='$idalternatif'"; 
+       mysqli_query($koneksi,$queryUpdate)or die(mysqli_error($koneksi));
 		
 	}
 		echo "</table></div></div> <br>";
@@ -459,7 +464,8 @@ function GetNilaiRandom($nilai){
 
 function UpdateNilaiPrioritas($koneksi,$table,$kode,$nilai,$fieldnilai,$fieldKode)
 {
-	$queryUpdate="UPDATE ".$table." set ".$fieldnilai."='".$nilai."' WHERE ".$fieldKode."=".$kode.""; 
+	echo $fieldKode;
+	$queryUpdate="UPDATE ".$table." set ".$fieldnilai."='".$nilai."' WHERE ".$fieldKode."='".$kode."'"; 
 $query=mysqli_query($koneksi,$queryUpdate)or die(mysqli_error($koneksi));
 
 // if(!$query)
