@@ -8,7 +8,7 @@ $jml_pengunjung=$_POST['jml_pengunjung'];
 $transportasi=$_POST['transportasi'];
 $infrastruktur=$_POST['infrastruktur'];
 
-$queryInsert="INSERT INTO wisata(nama_wisata, alamat, keterangan, fasilitas, jml_pengunjung, transportasi, infrastruktur) VALUES('".$nama_wisata."','".$alamat."','".$keterangan."','".$fasilitas."','".$jml_pengunjung."','".$transportasi."','".$infrastruktur."')"; 
+$queryInsert="INSERT INTO wisata(nama_wisata, alamat, keterangan, fasilitas, jml_pengunjung, transportasi, infrastruktur) VALUES('".$nama_wisata."','".$alamat."','".$keterangan."',".$fasilitas.",".$jml_pengunjung.",".$transportasi.",".$infrastruktur.")"; 
 $query=mysqli_query($koneksi,$queryInsert);
 
 if($query){

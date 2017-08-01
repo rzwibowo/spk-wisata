@@ -7,7 +7,7 @@ $id= $_GET['r'];
 
 $sql = "select * from wisata where id_wisata=$id";
 $hasil = mysqli_query ($koneksi,$sql) or die ("Gagal Akses");
-
+echo $hasil;
 $row = mysqli_fetch_assoc($hasil);
 ?>
 
@@ -58,17 +58,17 @@ $row = mysqli_fetch_assoc($hasil);
                         </div>
                         <div class="form-item">
                             <label for="transportasi">Transportasi</label>
-                            <input type="radio" name="transportasi" value="0"> 0 &nbsp;
                             <input type="radio" name="transportasi" value="1"> 1 &nbsp;
                             <input type="radio" name="transportasi" value="2"> 2 &nbsp;
+                            <input type="radio" name="transportasi" value="3"> 3 &nbsp;
                             <div id="message-transportasi" style="margin-top: 5px;"></div>
                         </div>
                         <div class="form-item">
                             <label for="infrastruktur">Infrastruktur</label>
-                            <input type="radio" name="infrastruktur" value="0"> 0 &nbsp;
                             <input type="radio" name="infrastruktur" value="1"> 1 &nbsp;
                             <input type="radio" name="infrastruktur" value="2"> 2 &nbsp;
                             <input type="radio" name="infrastruktur" value="3"> 3 &nbsp;
+                            <input type="radio" name="infrastruktur" value="4"> 4 &nbsp;
                             <div id="message-infrastruktur" style="margin-top: 5px;"></div>
                         </div>
                         <div class="row between">
