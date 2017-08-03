@@ -369,9 +369,15 @@ echo "<div class='row align-center'  style=' background-color:#6EB8B5'  id='nila
 				   $hasilKali = $prioritasQueue[str_replace(" ","_",$kriteria[$i])][str_replace(" ","_",$value)][str_replace(" ","_",$value.$index)] * $QueuePrioritas[str_replace(" ","_",$kriteria[$i])][str_replace(" ","_",$kriteria[$i]).$indexQueuePrioritas];
 				    $tem += $hasilKali;
 					$nilaiPrioritas =$prioritasQueue[str_replace(" ","_",$kriteria[$i])][str_replace(" ","_",$value)][str_replace(" ","_",$value).$index];
+
 				    $kodeSubkritetia = GenerateId("subkriteria","subkriteria_id",null,"S",$koneksi);
-				   $queryInsertSubkriteria="INSERT INTO subkriteria(subkriteria_id,kriteria_id,id_alternatif,prioritas_subkriteria,perkalian) VALUES('".$kodeSubkritetia."',".$id_kriteria[$i].",".$idalternatif.",".$nilaiPrioritas.",".$hasilKali.")"; 
-	    			mysqli_query($koneksi,$queryInsertSubkriteria);
+
+				   $queryInsertSubkriteria="INSERT INTO subkriteria(subkriteria_id,kriteria_id,id_alternatif,prioritas_subkriteria,perkalian) VALUES('".$kodeSubkritetia."','".$id_kriteria[$i]."','".$idalternatif."',".$nilaiPrioritas.",".$hasilKali.")"; 
+
+	    			$result =mysqli_query($koneksi,$queryInsertSubkriteria);
+	    			if(!$result){
+	    				mysqli_error($koneksi);
+	    			}
 
 		     echo "<td>".$nilaiPrioritas."</td>";
 		     if($nilaiTertinggi == 0 && $wisataTertingi ==" ")
@@ -407,7 +413,8 @@ echo "<div class='row align-center'  style=' background-color:#6EB8B5'  id='nila
 	function nilaiCR($jumlahBarisQueue,$prioritasQueue,$kriteria)
 {
     $jumKriteria = count($kriteria);
-    $nilaiIndexRandom = GetNilaiRandom(round($jumlahBarisQueue['jumlah']));
+    $CR = 0;
+    $nilaiIndexRandom = GetNilaiRandom(floor($jumlahBarisQueue['jumlah']));
 	echo "<div class='col-12'> <div class='text-center'>";
 	echo "<br><br><h4>Nilai CR</h4> </div></div>";
 	echo "<div class='row'><div class='col-12'><table style='background-color:#DB1C58' class='bordered'>";
@@ -417,7 +424,13 @@ echo "<div class='row align-center'  style=' background-color:#6EB8B5'  id='nila
 	$nilaimax = round($jumlahBarisQueue['jumlah']/$jumKriteria,4);
 	//echo $nilaimax;
 	$CI = round(($nilaimax -$jumKriteria)/($jumKriteria - 1),2);
-	$CR = 	round($CI/$nilaiIndexRandom,2);
+	$NilaiCR = @($CI/$nilaiIndexRandom);
+	if($NilaiCR === -INF ||  $NilaiCR === INF)
+	{
+		$CR ="<h2>∞ (Nilai Tak Terhingga)</h2>";
+	}else{
+	    $CR  = round($NilaiCR,2);
+	}
 	echo "<tr><th>maks</th><th>".$nilaimax."</th></tr>";
 	echo "<tr><th>CI</th><th>".$CI."</th></tr>";
 	echo "<tr><th>Index Rendom</th><th>".$nilaiIndexRandom."</th></tr>";
@@ -429,8 +442,9 @@ echo "<div class='row align-center'  style=' background-color:#6EB8B5'  id='nila
 function nilaiCRPerKriteria($jumlahBarisQueue,$prioritasQueue,$wisata)
 {
 	$maks=0;
+	$CR =0;
 	$count = count($wisata);
-	$nilaiIndexRandom = GetNilaiRandom(round($jumlahBarisQueue['jumlah'])); 
+	$nilaiIndexRandom = GetNilaiRandom(floor($jumlahBarisQueue['jumlah'])); 
 	echo "<b>Nilai CR</b>";
 	echo "<table class='bordered' style='background-color:#DB1C58'>";
 	echo "<tr>";
@@ -438,7 +452,15 @@ function nilaiCRPerKriteria($jumlahBarisQueue,$prioritasQueue,$wisata)
 	echo "</tr>";
   	$maks = round($jumlahBarisQueue['jumlah']/$count,2);
     $CI =round(($maks-$count)/($count - 1),2);
-	$CR = 	round($CI/$nilaiIndexRandom,2);
+
+    $NilaiCR = @($CI/$nilaiIndexRandom);
+	if($NilaiCR === -INF ||  $NilaiCR === INF)
+	{
+		$CR ="<h2>∞ (Nilai Tak Terhingga)</h2>";
+	}else{
+	    $CR  = round($NilaiCR,2);
+	}
+
 	echo "<tr><th>maks</th><th>".$maks."</th></tr>";
 	echo "<tr><th>CI</th><th>".$CI."</th></tr>";
 	echo "<tr><th>Index Rendom</th><th>".$nilaiIndexRandom."</th></tr>";
@@ -463,7 +485,6 @@ function GetNilaiRandom($nilai){
 
 function UpdateNilaiPrioritas($koneksi,$table,$kode,$nilai,$fieldnilai,$fieldKode)
 {
-	echo $fieldKode;
 	$queryUpdate="UPDATE ".$table." set ".$fieldnilai."='".$nilai."' WHERE ".$fieldKode."='".$kode."'"; 
 $query=mysqli_query($koneksi,$queryUpdate)or die(mysqli_error($koneksi));
 

@@ -27,11 +27,11 @@
                         </div>
                         <div class="form-item">
                             <label for="fasilitas">Fasilitas</label>
-                            <input type="radio" name="fasilitas" value="1"> Sangat Kurang Lengkap &nbsp;
-                            <input type="radio" name="fasilitas" value="2"> Kurang Lengkap &nbsp;
-                            <input type="radio" name="fasilitas" value="3"> Cukup Lengkap &nbsp;
-                            <input type="radio" name="fasilitas" value="4"> Lengkap &nbsp;
-                            <input type="radio" name="fasilitas" value="5"> Sangat Lengkap &nbsp;
+                            <input type="radio" name="fasilitas" value="1"> Sangat Kurang Lengkap <br>
+                            <input type="radio" name="fasilitas" value="2"> Kurang Lengkap <br>
+                            <input type="radio" name="fasilitas" value="3"> Cukup Lengkap <br>
+                            <input type="radio" name="fasilitas" value="4"> Lengkap <br>
+                            <input type="radio" name="fasilitas" value="5"> Sangat Lengkap <br>
                             <div id="message-fasilitas" style="margin-top: 5px;"></div>
                         </div>
                         <div class="form-item">
@@ -50,10 +50,10 @@
                         </div>
                         <div class="form-item">
                             <label for="infrastruktur">Infrastruktur</label>
-                            <input type="radio" name="infrastruktur" value="1"> Tidak ada &nbsp;
-                            <input type="radio" name="infrastruktur" value="2"> Ada salah satu &nbsp;
-                            <input type="radio" name="infrastruktur" value="3"> Ada salah dua &nbsp;
-                            <input type="radio" name="infrastruktur" value="4"> Ada salah tiga &nbsp;
+                            <input type="radio" name="infrastruktur" value="1"> Tidak Ada <br>
+                            <input type="radio" name="infrastruktur" value="2"> Ada Salah Satu <br>
+                            <input type="radio" name="infrastruktur" value="3"> Ada Salah Dua <br>
+                            <input type="radio" name="infrastruktur" value="4"> Ada Salah Tiga
                             <div id="message-infrastruktur" style="margin-top: 5px;"></div>
                         </div>
     					<div class="row between">
