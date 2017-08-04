@@ -15,7 +15,6 @@
                         <th>No. </th>
                         <th>ID</th>
                         <th>Nama Wisata</th>
-                        <th>Periode</th>
                         <th>Nilai Global</th>
                     </tr>
                 </thead>
@@ -31,7 +30,6 @@
                         <?php echo "<td>".$no.". </td>"; ?>
                         <?php  echo "<td>".$row['id_alternatif']."</td>";?> 
                         <?php echo "<td>".$row['alternatif']."</td>";?>
-                        <?php echo "<td>".date("M Y",strtotime($row['periode']))."</td>";?>
                         <?php echo "<td>".$row['prioritas_global']."</td>";?>
                     <?php echo "</tr>"; ?>
                     <?php $no++; } ?>

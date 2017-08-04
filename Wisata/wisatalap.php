@@ -1,4 +1,28 @@
     <?php include "kepala.php"; ?>
+
+    <div id="main">
+    	<div class="row align-center">
+    		<div class="col-6">
+    			<div class="text-center">
+    				<h1>Daftar Wisata</h1>
+    				
+    			</div>
+                <br>
+                <div>
+                <table class="striped">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Nama Wisata</th>
+                        <th>Alamat</th>
+                        <th>Keterangan</th>
+                        <th>Fasilitas</th>
+                        <th>Jumlah Pengunjung</th>
+                        <th>Transportasi</th>
+                        <th>Infrastruktur</th>
+                    </tr>
+                </thead>
+
     <div id="main">
     	<div class="row align-center">
     		<div class="col-10">
@@ -22,7 +46,6 @@
                         <th>Jumlah Pengunjung</th>
                         <th>Transportasi</th>
                         <th>Infrastruktur</th>
-                        <th>Operasi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -147,3 +170,5 @@
     		</div>
     	</div>
     </div>
+
+               

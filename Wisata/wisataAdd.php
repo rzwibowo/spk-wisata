@@ -36,16 +36,16 @@
                         </div>
                         <div class="form-item">
                             <label for="jml_pengunjung">Jumlah Pengunjung</label>
-                            <input type="radio" name="jml_pengunjung" value="1"> &lt; 50 tidak banyak &nbsp;
-                            <input type="radio" name="jml_pengunjung" value="2"> 50-100 banyak &nbsp;
-                            <input type="radio" name="jml_pengunjung" value="3"> &gt; 100 sangat banyak &nbsp;
+                            <input type="radio" name="jml_pengunjung" value="1"> 1 < 50 Tidak Banyak <br>
+                            <input type="radio" name="jml_pengunjung" value="2"> 50 - 100 Banyak <br>
+                            <input type="radio" name="jml_pengunjung" value="3"> > 100 Sangat Banyak 
                             <div id="message-jml_pengunjung" style="margin-top: 5px;"></div>
                         </div>
                         <div class="form-item">
                             <label for="transportasi">Transportasi</label>
-                            <input type="radio" name="transportasi" value="1"> Tidak tersedia &nbsp;
-                            <input type="radio" name="transportasi" value="2"> Tersedia &nbsp;
-                            <input type="radio" name="transportasi" value="3"> Dilewati &nbsp;
+                            <input type="radio" name="transportasi" value="1"> Tidak Tersedia <br>
+                            <input type="radio" name="transportasi" value="2"> Tersedia <br>
+                            <input type="radio" name="transportasi" value="3"> Dilewati 
                             <div id="message-transportasi" style="margin-top: 5px;"></div>
                         </div>
                         <div class="form-item">

@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
+-- version 4.7.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 01, 2017 at 04:40 PM
--- Server version: 10.1.21-MariaDB
--- PHP Version: 7.0.16
+-- Generation Time: Aug 02, 2017 at 12:59 AM
+-- Server version: 10.1.22-MariaDB
+-- PHP Version: 7.1.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -19,8 +21,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `spk_wisata`
 --
-CREATE DATABASE IF NOT EXISTS `spk_wisata` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `spk_wisata`;
 
 -- --------------------------------------------------------
 
@@ -30,7 +30,7 @@ USE `spk_wisata`;
 
 CREATE TABLE `alternatif` (
   `id_alternatif` varchar(11) NOT NULL,
-  `periode` varchar(30) DEFAULT NULL,
+  `Periode` varchar(30) NOT NULL,
   `prioritas_global` decimal(10,2) DEFAULT NULL,
   `alternatif` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -39,38 +39,23 @@ CREATE TABLE `alternatif` (
 -- Dumping data for table `alternatif`
 --
 
-INSERT INTO `alternatif` (`id_alternatif`, `periode`, `prioritas_global`, `alternatif`) VALUES
-('008', '', '0.00', '1'),
-('1', '', '0.00', 'Pantai Lamsat'),
-('2', '', '0.00', 'Tugu Libra'),
-('3', '', '0.00', 'Patung hati Kudus Ye'),
-('4', '', '0.00', 'TN Wasur'),
-('5', '', '0.00', 'Danau Rawa Biru'),
-('6', '', '0.00', 'Tugu Perbatasan Saba'),
-('7', '', '0.00', 'Lotus Garden'),
-('8', '', '0.00', 'Sentra jagung'),
-('A0010', NULL, NULL, 'Sentra jagung'),
-('A0011', NULL, '0.00', 'Sentra jagung'),
-('A0012', NULL, '0.00', 'Pantai Lamsat'),
-('A0013', NULL, '0.00', 'Tugu Libra'),
-('A0014', NULL, '0.00', 'Patung hati Kudus Ye'),
-('A0015', NULL, '0.00', 'TN Wasur'),
-('A0016', NULL, '0.00', 'Danau Rawa Biru'),
-('A0017', NULL, '0.00', 'Tugu Perbatasan Saba'),
-('A0018', NULL, '0.14', 'Sentra jagung'),
-('A0019', NULL, '0.14', 'Pantai Lamsat'),
-('A0020', NULL, '0.14', 'Tugu Libra'),
-('A0021', NULL, '0.14', 'Patung hati Kudus Ye'),
-('A0022', NULL, '0.14', 'TN Wasur'),
-('A0023', NULL, '0.14', 'Danau Rawa Biru'),
-('A0024', NULL, '0.14', 'Tugu Perbatasan Saba'),
-('A0025', '01 August 2017 ', '0.14', 'Sentra jagung'),
-('A0026', '01 August 2017 ', '0.14', 'Pantai Lamsat'),
-('A0027', '01 August 2017 ', '0.14', 'Tugu Libra'),
-('A0028', '01 August 2017 ', '0.14', 'Patung hati Kudus Ye'),
-('A0029', '01 August 2017 ', '0.14', 'TN Wasur'),
-('A0030', '01 August 2017 ', '0.14', 'Danau Rawa Biru'),
-('A0031', '01 August 2017 ', '0.14', 'Tugu Perbatasan Saba');
+INSERT INTO `alternatif` (`id_alternatif`, `Periode`, `prioritas_global`, `alternatif`) VALUES
+('A0009', '01 August 2017 ', NULL, 'Pantai Lamsat'),
+('A001', 'Des 2016', '0.14', 'Pantai Lamsat'),
+('A0010', '01 August 2017 ', NULL, 'Tugu Libra'),
+('A0011', '01 August 2017 ', NULL, 'Patung HKY'),
+('A0012', '01 August 2017 ', NULL, 'TN Wasur'),
+('A0013', '01 August 2017 ', NULL, 'Danau Rawa Biru'),
+('A0014', '01 August 2017 ', NULL, 'TP Sabang-MRQ'),
+('A0015', '01 August 2017 ', NULL, 'Lotus Garden'),
+('A0016', '01 August 2017 ', NULL, 'Sentra Jagung'),
+('A002', '', '0.14', 'Tugu Libra'),
+('A003', '', '0.14', 'Patung HKY'),
+('A004', '', '0.14', 'TN Wasur'),
+('A005', '', '0.14', 'Danau Rawa Biru'),
+('A006', '', '0.00', 'TP Sabang-MRQ'),
+('A007', '', '0.00', 'Lotus Garden'),
+('A008', '', '0.03', 'Sentra jagung');
 
 -- --------------------------------------------------------
 
@@ -101,10 +86,10 @@ CREATE TABLE `kriteria` (
 --
 
 INSERT INTO `kriteria` (`kriteria_id`, `nama_kriteria`, `prioritas_kriteria`) VALUES
-('10', 'Inprastruktur', '0.25'),
-('7', 'Fasilitas', '0.25'),
-('8', 'Jumlah_Pengunjung', '0.25'),
-('K0006', 'Transportasi', '0.25');
+('10', 'Fasilitas', '0.55'),
+('7', 'Jumlah Pengunjung', '0.26'),
+('8', 'Transportasi', '0.15'),
+('K0006', 'Infrastruktur', '0.05');
 
 -- --------------------------------------------------------
 
@@ -119,44 +104,6 @@ CREATE TABLE `subkriteria` (
   `prioritas_subkriteria` decimal(10,2) NOT NULL,
   `perkalian` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `subkriteria`
---
-
-INSERT INTO `subkriteria` (`subkriteria_id`, `kriteria_id`, `id_alternatif`, `prioritas_subkriteria`, `perkalian`) VALUES
-('1', '7', '1', '0.13', '0.06'),
-('10', '8', '3', '0.13', '0.03'),
-('11', 'K0006', '3', '0.13', '0.02'),
-('12', '10', '3', '0.13', '0.01'),
-('13', '7', '4', '0.13', '0.06'),
-('14', '8', '4', '0.13', '0.03'),
-('15', 'K0006', '4', '0.13', '0.02'),
-('16', '10', '4', '0.13', '0.01'),
-('17', '7', '5', '0.13', '0.06'),
-('18', '8', '5', '0.13', '0.03'),
-('19', 'K0006', '5', '0.13', '0.02'),
-('2', '8', '1', '0.13', '0.03'),
-('20', '10', '5', '0.13', '0.01'),
-('21', '7', '6', '0.13', '0.06'),
-('22', '8', '6', '0.13', '0.03'),
-('23', 'K0006', '6', '0.13', '0.02'),
-('24', '10', '6', '0.13', '0.01'),
-('25', '7', '7', '0.13', '0.06'),
-('26', '8', '7', '0.13', '0.03'),
-('27', 'K0006', '7', '0.13', '0.02'),
-('28', '10', '7', '0.13', '0.01'),
-('29', '7', '8', '0.13', '0.06'),
-('3', 'K0006', '1', '0.13', '0.02'),
-('30', '8', '8', '0.13', '0.03'),
-('31', 'K0006', '8', '0.13', '0.02'),
-('32', '10', '8', '0.13', '0.01'),
-('4', '10', '1', '0.13', '0.01'),
-('5', '7', '2', '0.13', '0.06'),
-('6', '8', '2', '0.13', '0.03'),
-('7', 'K0006', '2', '0.13', '0.02'),
-('8', '10', '2', '0.13', '0.01'),
-('9', '7', '3', '0.13', '0.06');
 
 -- --------------------------------------------------------
 
@@ -199,14 +146,14 @@ CREATE TABLE `wisata` (
 --
 
 INSERT INTO `wisata` (`id_wisata`, `nama_wisata`, `alamat`, `keterangan`, `fasilitas`, `jml_pengunjung`, `transportasi`, `infrastruktur`) VALUES
-('', 'deso', 'wisoto', 'mulyo', 2, 3, 2, 4),
-('10', 'Sentra jagung', 'oo', 'oo', 0, 0, 0, 0),
-('3', 'Pantai Lamsat', 'x', 'y', 0, 0, 0, 0),
-('4', 'Tugu Libra', 'x', 'y', 0, 0, 0, 0),
-('5', 'Patung hati Kudus Ye', 'y', 'x', 0, 0, 0, 0),
-('6', 'TN Wasur', 'x', 'y', 0, 0, 0, 0),
-('7', 'Danau Rawa Biru', 'i', 'j', 0, 0, 0, 0),
-('8', 'Tugu Perbatasan Saba', 'p', 'p', 0, 0, 0, 0);
+('1', 'Pantai Lamsat', 'Jalan Ndorem Buti', 'Garis pantai terpanjang di kota Merauke', 3, 2, 3, 3),
+('10', 'Tugu Libra', 'Jalan Brawijaya', 'Taman kota merauke', 3, 3, 2, 4),
+('3', 'Patung HKY', 'Jalan Mopah Baru', 'Patung yang dibangun untuk memperingati masuknya Misionaris Hati Kudus YESUS (MSC) ke 105 tahun di Tanah Marind', 3, 2, 2, 4),
+('4', 'TN Wasur', 'Jalan Wasur Km 12', 'Hutan lindung ', 3, 2, 3, 1),
+('5', 'Danau Rawa Biru', 'Jalan Rawa Biru Km 40', 'Rawa yang menyerupai danau dengan dikelilingi padang savana', 2, 2, 3, 1),
+('6', 'TP Sabang-MRQ', 'Jalan Sota, Trans Papua', 'Tugu Perbatasan antara Indonesia dan PNG', 4, 3, 3, 1),
+('7', 'Lotus Garden', 'Jalan Semangga jaya', 'Taman di dalam hutan rawa', 4, 3, 3, 2),
+('8', 'Sentra Jagung', 'Jalan Poros Semangga, Kampung ', 'Rumah makan jagung', 3, 3, 3, 4);
 
 --
 -- Indexes for dumped tables
@@ -278,6 +225,7 @@ ALTER TABLE `detail_kriteria`
 ALTER TABLE `subkriteria`
   ADD CONSTRAINT `subkriteria_ibfk_3` FOREIGN KEY (`kriteria_id`) REFERENCES `kriteria` (`kriteria_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `subkriteria_ibfk_4` FOREIGN KEY (`id_alternatif`) REFERENCES `alternatif` (`id_alternatif`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

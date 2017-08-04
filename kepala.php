@@ -20,9 +20,11 @@
             <ul>
                 <li><a href="index.php?page=kriteria_show">Kriteria</a></li>
                 <li><a href="index.php?page=wisata_show">Wisata</a></li>
+				<li><a href="index.php?page=perhitunganInput">Perhitungan</a></li>
                 <li><a href="index.php?page=alternatif_show">Alternatif</a></li>
+				<li><a href="index.php?page=wisataShow">Daftar Wisata</a></li>
                 <li><a href="index.php?page=user_show">User</a></li>
-                <li><a href="index.php?page=perhitunganInput">Perhitungan</a></li>
+               
             </ul>
         </nav>
         <nav id="user" class="push-right">
