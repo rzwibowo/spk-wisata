@@ -126,7 +126,7 @@ switch ($page) {
         break;
     //end perhitungan
     default:
-     include "Config/menu.php";
+     include "Config/menu2.php";
 }
 
 ?>

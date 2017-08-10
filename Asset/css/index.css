@@ -1,0 +1,82 @@
+body{
+    background: url("../img/bgOK.jpg");
+    background-attachment: fixed;
+    background-size: cover;
+}
+#x{
+    position: absolute;
+    z-index: -2;
+}
+#wadah{
+    /* border: 1px dotted darkblue; */
+    /* min-width: 320px; */
+    /* max-width: 840px; */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+#buram{
+    /* border: 2px dotted darkcyan; */
+    height: inherit;
+    width: inherit;
+    display: block;
+     z-index: -1; 
+     position: absolute; 
+     /* filter: blur(3px);  */
+     background-color: rgb(26, 188, 156);
+     opacity: 0.7; 
+}
+#wadah-menu{
+    /* border: 1px solid olive; */
+    width: inherit;
+    padding: 30px;
+    /* height: 200px; */
+    /* padding: 10px; */
+}
+.menu{
+    padding: 5px;
+    /* background: blue; */
+    min-width: 100px;
+     margin: 5px; 
+      cursor: pointer; 
+      opacity: 0.8;
+}
+
+.menu:hover{
+    opacity: 1;
+}
+
+.menu .icon{
+    display: block;
+    font-family: Webdings;
+    font-size: 3em;
+    margin: 30px auto;
+    color: white;
+}
+.menu .title{
+    margin: 2px auto;
+    color: white;
+}
+
+#logout{
+    background-color: rgb(231, 76, 60);
+}
+#kriteria{
+    background-color: rgb(230, 126, 34);
+}
+#alternatif{
+    background-color: rgb(155, 89, 182);
+}
+#wisata{
+    background-color: rgb(39, 174, 96);
+}
+#user{
+    background-color: rgb(149, 165, 166);
+}
+#hitung{
+    background-color: rgb(41, 128, 185);
+}
+#login{
+    background-color: rgb(26, 188, 156);
+}
