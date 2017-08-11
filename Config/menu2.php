@@ -18,6 +18,24 @@
         <div id="wadah">
             <div id="buram"></div>
             <div id="wadah-menu">
+                <div class="message focus">
+                    <h5>Pengembangan Wisata</h5>
+                    <?php
+                        if(isset($_SESSION["user"])){
+					?>
+                    <div class="login-out">
+                        <a href="index.php?page=logout">&#215; LOGOUT</a>
+                    </div>
+                    <?php
+                        }else{
+                    ?>
+                    <div class="login-out">
+                        <a href="index.php">&#187; LOGIN</a>
+                    </div>
+                     <?php
+                        }
+					?>
+                </div>
                 <div class="row gutters auto">
                     <div id="kriteria" onclick="location.href='index.php?page=kriteria_show'" class="col menu text-center">
                         <div class="icon">&#xa4;</div>
@@ -27,35 +45,29 @@
                         <div class="icon">&#xaa;</div>
                         <div class="title">Kelola Data Alternatif</div>
                     </div>
-                    <div id="wisata" onclick="location.href='index.php?page=wisata_show'" class="col menu text-center">
-                        <div class="icon">&#x49;</div>
-                        <div class="title">Kelola Data Wisata</div>
-                    </div>
                     <div id="user" onclick="location.href='index.php?page=user_show'" class="col menu text-center">
                         <div class="icon">&#xcf;</div>
                         <div class="title">Kelola Data User</div>
+                    </div>
+                    <div id="wisata" onclick="location.href='index.php?page=wisata_show'" class="col menu text-center">
+                        <div class="icon">&#x49;</div>
+                        <div class="title">Kelola Data Wisata</div>
                     </div>
                     <div id="hitung" onclick="location.href='index.php?page=perhitunganInput'" class="col menu text-center">
                         <div class="icon">&#xcb;</div>
                         <div class="title">Perhitungan</div>
                     </div>
-                    <?php
-                        if(isset($_SESSION["user"])){
-					?>
-                    <div id="logout" onclick="location.href='index.php?page=logout'" class="col menu text-center">
+                    
+                    <!-- <div id="logout" onclick="location.href='index.php?page=logout'" class="col menu text-center">
                         <div class="icon">&#xd3;</div>
                         <div class="title">Logout</div>
-                    </div>
-                    <?php
-                        }else{
-					?>
-                    <div id="login" onclick="location.href='index.php'" class="col menu text-center">
+                    </div> -->
+                    
+                    <!-- <div id="login" onclick="location.href='index.php'" class="col menu text-center">
                         <div class="icon">&#xd2;</div>
                         <div class="title">Login</div>
-                    </div>
-                    <?php
-                        }
-					?>
+                    </div> -->
+                   
                 </div>
             </div>
         </div>

@@ -9,7 +9,7 @@ body{
 }
 #wadah{
     /* border: 1px dotted darkblue; */
-    /* min-width: 320px; */
+     /* min-width: 320px;  */
     /* max-width: 840px; */
     position: fixed;
     top: 50%;
@@ -79,4 +79,12 @@ body{
 }
 #login{
     background-color: rgb(26, 188, 156);
+}
+
+.login-out{
+    position: absolute;
+    display: inline-block;
+    right: 20px;
+    top: 20px;
+    color: red;
 }
