@@ -15,6 +15,12 @@
                         <th>Nama Wisata</th>
                         <th>Alamat</th>
                         <th>Keterangan</th>
+                        <?php
+                        $resalt = mysqli_query($koneksi,"SELECT nama_kriteria FROM kriteria");
+                            while ($rs = mysqli_fetch_array($resalt)) {
+                                echo "<th>".$rs['nama_kriteria']."</th>";
+                            }
+                        ?>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,6 +37,24 @@
                         <?php echo "<td>".$row['nama_wisata']."</td>";?>
                         <?php echo "<td>".$row['alamat']."</td>";?>
                         <?php echo "<td>".$row['keterangan']."</td>";?>
+                        <?php
+                        $query = mysqli_query($koneksi,"SELECT DISTINCT id_kriteria FROM detail_kriteria_wisata 
+                            WHERE id_wisata='$row[id_wisata]'");
+                        while ($rs = mysqli_fetch_array($query)) {
+                            echo "<td>";
+                            $querydetail = mysqli_query($koneksi,"SELECT dk.nama  
+                                AS nama FROM detail_kriteria_wisata dw 
+                                JOIN detail_kriteria dk
+                                ON dw.id_detailkriteria = dk.id_detail_kriteria
+                                WHERE dw.id_wisata ='$row[id_wisata]' AND dw.id_kriteria ='$rs[id_kriteria]'");
+                                echo "<ol>";
+                            while ($rest = mysqli_fetch_array($querydetail)) {
+                                echo "<li>".$rest['nama']."</li>";
+                                }
+                                echo "</ol>";
+                                echo "</td>";
+                        }
+                        ?>
                     <?php echo"</tr>"; ?>
                     <?php $no++; } ?>
                 </tbody>
