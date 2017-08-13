@@ -42,14 +42,6 @@
                 </tbody>
                 </table>
                 </div>
-    			<p class="message warning">
-                    <?php
-                    $sql2 = "SELECT alternatif,prioritas_global FROM alternatif WHERE prioritas_global=(SELECT MAX(prioritas_global) FROM alternatif)";
-                    $hasil2 = mysqli_query ($koneksi,$sql2) or die ("Gagal Akses");
-                    $row2 = mysqli_fetch_array ($hasil2);
-                    ?>
-                   Objek wisata yang menjadi prioritas <b>untuk dikembangakan</b> adalah <b><?php echo $row2['alternatif'] ?></b> dengan nilai <b><?php echo $row2['prioritas_global'] ?></b>
-                </p>
                  <div style="text-align: right;">
                     <a href="index.php?page=kriteria_add" class="button" onclick="window.history.back();">Kembali</a>                      
                 </div>

@@ -57,6 +57,10 @@
                         <div class="icon">&#xcb;</div>
                         <div class="title">Perhitungan</div>
                     </div>
+                    <div id="kriteria" onclick="location.href='index.php?page=Laporan'" class="col menu text-center">
+                        <div class="icon">&#xa4;</div>
+                        <div class="title">Laporan</div>
+                    </div>
                     
                     <!-- <div id="logout" onclick="location.href='index.php?page=logout'" class="col menu text-center">
                         <div class="icon">&#xd3;</div>
