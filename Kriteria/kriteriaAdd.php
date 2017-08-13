@@ -14,12 +14,24 @@
     						<input type="text" name="nama_kriteria" class="w50" id="nama_kriteria">
                             <div id="message-nama_kriteria" style="margin-top: 5px;"></div>
     					</div>
-    					<div class="row between">
-    						<button type="reset" class="button secondary outline w15">Reset</button>
-    						<button type="submit" name="submit" value="KriteriaSave" class="button upper" id="kirim">Simpan</button>
-    					</div>
+                        <div class="form-item">
+                            <label for="nama_kriteria">Pilihan</label>
+                            <input type="radio" name="multiselect" value="1"> Check Box
+                            <input type="radio" name="multiselect" value="0"> Radio
+                            <div id="message-nama_kriteria" style="margin-top: 5px;"></div>
+                        </div>
 
     				</fieldset>
+                    <p class="button upper" id="addDetail">+</p>
+                        <div id="detailKriteria">
+                            
+                        </div>
+                    <fieldset>
+                            <div class="row between">
+                            <button type="reset" class="button secondary outline w15">Reset</button>
+                            <button type="submit" name="submit" value="KriteriaSave" class="button upper" id="kirim">Simpan</button>
+                        </div>
+                    </fieldset>
     			</form>
     		</div>
     	</div>
@@ -29,6 +41,7 @@
     <script type="text/javascript">
         var nama_wisata;
         var alamat;
+        var count=0;
     /*
      validasi nama propinsi , tidak bleh kosong
     */
@@ -91,5 +104,9 @@
         
         });
     });
-
+    //add kriteria
+    $("#addDetail").click(function(){
+        count++;
+       $("#detailKriteria").append("<div>Pilihan Kriteria "+count+" <fieldset>Nama Kriteria<input type='text' name='detail[kriteria"+count+"][]'>Nilai<input type='text' name='detail[kriteria"+count+"][]'></fieldset></div>");
+    });
     </script>

@@ -47,6 +47,9 @@ switch ($page) {
     case 'WisataDelete':
     	include "Wisata/WisataDelete.php";
     	break;
+    case 'WisataDetail':
+        include "Wisata/DetailWisata.php";
+        break;
     //end wisata
    
     //alternatif
@@ -125,6 +128,23 @@ switch ($page) {
         include "Perhitungan/proses.php";
         break;
     //end perhitungan
+    //Laporan
+    case 'Laporan':
+        include "Laporan/Laporan.php";
+        break;
+    case 'LDaftarKriteria':
+        include "Laporan/LaporanDaftarKriteria.php";
+        break;
+    case 'LDaftarAlternatif':
+        include "Laporan/LaporanDaftarAlternatif.php";
+        break;
+    case 'LDaftarWisata':
+        include "Laporan/LaporanDaftarWisata.php";
+        break;
+    case 'LDaftarPenilaian':
+        include "Laporan/LaporanDaftarPenilaian.php";
+        break;
+    //end Laporan
     default:
      include "Config/menu.php";
 }

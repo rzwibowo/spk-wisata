@@ -19,6 +19,9 @@
 					<div class="form-item">
 						<a href="index.php?page=perhitunganInput" class="button w70 big" role="button">Perhitungan</a>
 					</div>
+					<div class="form-item">
+						<a href="index.php?page=Laporan" class="button w70 big" role="button">Laporan</a>
+					</div>
 					<?php
 					  if(isset($_SESSION["user"])){
 					  	?>

@@ -37,37 +37,46 @@ $row = mysqli_fetch_assoc($hasil);
                             <textarea name="keterangan" id="keterangan" cols="30" rows="3"><?php echo $row['keterangan']?></textarea>
                             <div id="message-keterangan" style="margin-top: 5px;"></div>
                         </div>
-                        <div class="form-item">
-                            <label for="fasilitas">Fasilitas</label>
-                            <input type="radio" name="fasilitas" value="1"> Sangat Kurang Lengkap <br>
-                            <input type="radio" name="fasilitas" value="2"> Kurang Lengkap <br>
-                            <input type="radio" name="fasilitas" value="3"> Cukup Lengkap <br>
-                            <input type="radio" name="fasilitas" value="4"> Lengkap <br>
-                            <input type="radio" name="fasilitas" value="5"> Sangat Lengkap <br>
-                            <div id="message-fasilitas" style="margin-top: 5px;"></div>
-                        </div>
-                        <div class="form-item">
-                            <label for="jml_pengunjung">Jumlah Pengunjung</label>
-                            <input type="radio" name="jml_pengunjung" value="1"> 1 < 50 Tidak Banyak <br>
-                            <input type="radio" name="jml_pengunjung" value="2"> 50 - 100 Banyak <br>
-                            <input type="radio" name="jml_pengunjung" value="3"> > 100 Sangat Banyak 
-                            <div id="message-jml_pengunjung" style="margin-top: 5px;"></div>
-                        </div>
-                        <div class="form-item">
-                            <label for="transportasi">Transportasi</label>
-                             <input type="radio" name="transportasi" value="1"> Tidak Tersedia <br>
-                            <input type="radio" name="transportasi" value="2"> Tersedia <br>
-                            <input type="radio" name="transportasi" value="3"> Dilewati
-                            <div id="message-transportasi" style="margin-top: 5px;"></div>
-                        </div>
-                        <div class="form-item">
-                            <label for="infrastruktur">Infrastruktur</label>
-                             <input type="radio" name="infrastruktur" value="1"> Tidak Ada <br>
-                            <input type="radio" name="infrastruktur" value="2"> Ada Salah Satu <br>
-                            <input type="radio" name="infrastruktur" value="3"> Ada Salah Dua <br>
-                            <input type="radio" name="infrastruktur" value="4"> Ada Salah Tiga
-                            <div id="message-infrastruktur" style="margin-top: 5px;"></div>
-                        </div>
+                        <?php
+                        $Query = mysqli_query($koneksi, "SELECT * FROM kriteria") or die ("Gagal ambil data kriteria");
+                            while ($rs = mysqli_fetch_array($Query)) {
+                                 if($rs['multiselect'] == 1){
+                                    $QueryDetail = mysqli_query($koneksi,"SELECT * FROM detail_kriteria WHERE id_kriteria ='".$rs['kriteria_id']."'") or die("Gagal Ambil Data Detail kriteria");
+                                   echo "<div class='form-item'>
+                                    <label for='fasilitas'>$rs[nama_kriteria]</label>";
+                                    while($rsd = mysqli_fetch_array($QueryDetail) ){
+                                        ?>
+                                    <input type="checkbox" 
+                                    name="<?php echo "detail[".$rs['kriteria_id']."][]"?>" 
+                                    value="<?php echo $rsd['id_detail_kriteria']?>"
+                                        <?php if(checeked($koneksi,$id,$rs['kriteria_id'],$rsd['id_detail_kriteria']) == true){ 
+                                            echo "checked=checked";
+                                                 }?> > 
+                                           <?php echo $rsd['nama']?><br>
+                                    <div id='message-fasilitas' style='margin-top: 5px;'></div>
+                                    <?php
+                                    }
+                                    echo " </div>"; 
+                                 }
+                                   else{
+                                     $QueryDetail = mysqli_query($koneksi,"SELECT * FROM detail_kriteria WHERE id_kriteria ='".$rs['kriteria_id']."'") or die("Gagal Ambil Data Detail kriteria");
+                                    echo "<div class='form-item'>
+                                    <label for='fasilitas'>$rs[nama_kriteria]</label>";
+                                    while($rsd = mysqli_fetch_array($QueryDetail) ){
+                                         ?>
+                                         <input type="radio" 
+                                         name="<?php echo "detail[".$rs['kriteria_id']."][]"?>"
+                                         value="<?php echo $rsd['id_detail_kriteria'];?>"
+                                          <?php if(checeked($koneksi,$id,$rs['kriteria_id'],$rsd['id_detail_kriteria']) == true){echo "checked=checked";
+                                              } ?> > <?php echo $rsd['nama']?><br>
+                                    <div id='message-fasilitas' style='margin-top: 5px;'></div>
+                                    <?php
+                                    }
+                                      echo " </div>";    
+                                    }
+                             }
+                        
+                        ?>
                         <div class="row between">
                             <button type="reset" class="button secondary outline w15">Reset</button>
                             <button type="submit" name="submit" value="WisataUpdate" class="button upper" id="kirim">Simpan</button>
@@ -77,82 +86,92 @@ $row = mysqli_fetch_assoc($hasil);
             </div>
         </div>
     </div>
-
+<?php
+function checeked($koneksi,$id_wisata,$id_kriteria,$id_detailkriteria){
+   $QuerySql = mysqli_query($koneksi,"SELECT * FROM detail_kriteria_wisata WHERE id_wisata ='$id_wisata' AND id_kriteria ='$id_kriteria' AND id_detailkriteria ='$id_detailkriteria'");
+   $rows =mysqli_num_rows($QuerySql);
+   if($rows > 0){
+    return true;
+   }else{
+    return false;
+   }
+}
+?>
 
     <script type="text/javascript">
-        var fasilitas=$("#fasilitas").val();
-        var jml_pengunjung=$("#jml_pengunjung").val();
-        var transportasi=$("#transportasi").val();
-        var infrastruktur=$("#infrastruktur").val();
+        // var fasilitas=$("#fasilitas").val();
+        // var jml_pengunjung=$("#jml_pengunjung").val();
+        // var transportasi=$("#transportasi").val();
+        // var infrastruktur=$("#infrastruktur").val();
 
-        $("input:radio[name=fasilitas][value="+fasilitas+"]").attr('checked','checked');
-        $("input:radio[name=jml_pengunjung][value="+jml_pengunjung+"]").attr('checked','checked');
-        $("input:radio[name=transportasi][value="+transportasi+"]").attr('checked','checked');
-        $("input:radio[name=infrastruktur][value="+infrastruktur+"]").attr('checked','checked');
+        // $("input:radio[name=fasilitas][value="+fasilitas+"]").attr('checked','checked');
+        // $("input:radio[name=jml_pengunjung][value="+jml_pengunjung+"]").attr('checked','checked');
+        // $("input:radio[name=transportasi][value="+transportasi+"]").attr('checked','checked');
+        // $("input:radio[name=infrastruktur][value="+infrastruktur+"]").attr('checked','checked');
         
-        var nama_wisata;
-        var password;
+        // var nama_wisata;
+        // var password;
     /*
      validasi nama propinsi , tidak bleh kosong
     */
-        $("#nama_wisata").blur(function(){
-            nama_wisata= $(this).val();
-            if(nama_wisata.length==0)
-            {
-              $("#message-nama_wisata").show();
-              $("#message-nama_wisata").addClass("message error");
-              $("#message-nama_wisata").html("<span>Nama propinsi tidak boleh kosong!</span>");
-            }else
-            {
-                $("#message-nama_wisata").hide();
-            } 
-        });
+        // $("#nama_wisata").blur(function(){
+        //     nama_wisata= $(this).val();
+        //     if(nama_wisata.length==0)
+        //     {
+        //       $("#message-nama_wisata").show();
+        //       $("#message-nama_wisata").addClass("message error");
+        //       $("#message-nama_wisata").html("<span>Nama propinsi tidak boleh kosong!</span>");
+        //     }else
+        //     {
+        //         $("#message-nama_wisata").hide();
+        //     } 
+        // });
 
     /*
      validasi nama password , tidak bleh kosong
     */
-        $("#password").blur(function(){
-            password= $(this).val();
+        // $("#password").blur(function(){
+        //     password= $(this).val();
             
-            if(password.length==0)
-            {
-              $("#message-password").show();
-              $("#message-password").addClass("message error");
-              $("#message-password").html("<span>Nama ib ukota tidak boleh kosong!</span>");
-            }else
-            {
-              $("#message-password").hide();
-            } 
-        });
+        //     if(password.length==0)
+        //     {
+        //       $("#message-password").show();
+        //       $("#message-password").addClass("message error");
+        //       $("#message-password").html("<span>Nama ib ukota tidak boleh kosong!</span>");
+        //     }else
+        //     {
+        //       $("#message-password").hide();
+        //     } 
+        // });
       
     /*
     validasi kirim
     */
-    $("#kirim").click(function(){
-    $('form[name=form-kirim]').submit(function(){
-        nama_wisata       =$("#nama_wisata").val();
-        password         =$("#password").val();
+    // $("#kirim").click(function(){
+    // $('form[name=form-kirim]').submit(function(){
+    //     nama_wisata       =$("#nama_wisata").val();
+    //     password         =$("#password").val();
 
-           if(nama_wisata.length==0){
-               $("#nama_wisata").focus();
-               $("#message-nama_wisata").addClass("message error");
-               $("#message-nama_wisata").html("<span>nama propinsi tidak boleh kosong!</span>");
-               return false;
-            }
-            else if(password.length==0)
-            {
-                $("#password").focus();
-                $("#message-password").addClass("message error");
-                $("#message-password").html("<span>nama ibu kota tidak boleh kosong!</span>");
-                return false;
-            }
+    //        if(nama_wisata.length==0){
+    //            $("#nama_wisata").focus();
+    //            $("#message-nama_wisata").addClass("message error");
+    //            $("#message-nama_wisata").html("<span>nama propinsi tidak boleh kosong!</span>");
+    //            return false;
+    //         }
+    //         else if(password.length==0)
+    //         {
+    //             $("#password").focus();
+    //             $("#message-password").addClass("message error");
+    //             $("#message-password").html("<span>nama ibu kota tidak boleh kosong!</span>");
+    //             return false;
+    //         }
 
-            else
-            {
-                return true;
-            }
+    //         else
+    //         {
+    //             return true;
+    //         }
         
-        });
-    });
+    //     });
+    // });
 
     </script>

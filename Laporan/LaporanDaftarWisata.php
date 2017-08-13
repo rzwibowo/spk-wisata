@@ -1,14 +1,11 @@
-    <?php include "kepala.php"; ?>
+
     <div id="main">
     	<div class="row align-center">
     		<div class="col-10">
     			<div class="text-center">
-    				<h1>Daftar Wisata</h1>
+    				<h1>Laporan Daftar Wisata</h1>
     				
     			</div>
-    			<div>
-                    <a href="index.php?page=wisata_add" class="button">Tambah Data Wisata</a>                    
-                </div>
                 <br>
                 <div>
                 <table class="striped">
@@ -18,7 +15,6 @@
                         <th>Nama Wisata</th>
                         <th>Alamat</th>
                         <th>Keterangan</th>
-                        <th>Operasi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -27,26 +23,24 @@
                 $hasil = mysqli_query ($koneksi,$sql) or die ("Gagal Akses");
 				 $no=1;
                 while ($row = mysqli_fetch_array ($hasil)){
-            
+
+               
                 ?>
                     <?php "<tr>"; ?>
                         <?php echo "<td>".$no.". </td>"; ?> 
                         <?php echo "<td>".$row['nama_wisata']."</td>";?>
                         <?php echo "<td>".$row['alamat']."</td>";?>
                         <?php echo "<td>".$row['keterangan']."</td>";?>
-                        <?php echo
-                        "<td>
-                        <a href='index.php?r=".$row['id_wisata']."&page=WisataDetail' class='button'>Detail</a>
-                        <a href='index.php?r=".$row['id_wisata']."&page=WisataEdit' class='button'>Edit</a>
-                        <a href='index.php?r=".$row['id_wisata']."&page=WisataDelete' class='button' onclick = 'if (! confirm('Yakin akan menghapus data?')) { return false; }' style='background-color: #ff3333' >Hapus</a>
-                        </td>";
-                        ?>
                     <?php echo"</tr>"; ?>
                     <?php $no++; } ?>
                 </tbody>
                 </table>
+                <div style="text-align: right;">
+                    <a href="index.php?page=kriteria_add" class="button" onclick="window.history.back();">Kembali</a>                      
                 </div>
-    			
+                <br>
+                </div>
+
     		</div>
     	</div>
     </div>
