@@ -146,7 +146,7 @@ switch ($page) {
         break;
     //end Laporan
     default:
-     include "Config/menu.php";
+     include "Config/menu2.php";
 }
 
 ?>
