@@ -18,8 +18,8 @@
         <div id="wadah">
             <div id="buram"></div>
             <div id="wadah-menu">
-                <div class="message focus">
-                    <h5>Pengembangan Wisata</h5>
+                <div class="message focus" style="min-width: 310px;">
+                    <div><h5>Pengembangan Wisata</h5></div>
                     <?php
                         if(isset($_SESSION["user"])){
 					?>
