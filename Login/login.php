@@ -16,6 +16,14 @@
 						<input type="password" name="password" id="password">
 						<div id="error_password" style="margin-top: 5px;"></div>
 					</div>
+					 <div class="form-item">
+                            <label for="level">Level User</label>
+                            <select name="level" class="w50" id="level">
+                                <option value="0">Admin</option>
+                                <option value="1">Pemimpin</option>
+                            </select>
+                            <div id="error_level" style="margin-top: 5px;"></div>
+                        </div>
 					<div class="row align-center">
 						<button type="submit" name="submit" value="LOGIN_PROSES" class="button big" id="login">Masuk</button>
 					</div>
@@ -33,6 +41,7 @@
 			$('form[name=form-login]').submit(function(){
 		        var username       =$("#username").val();
 		        var password       =$("#password").val();
+		        var level          =$("#level").val() ;
 			       
 
 		       if(username.length==0){
@@ -47,6 +56,13 @@
 		            $("#password").focus();
 		            $("#error_password").addClass("message error");
 		            $("#error_password").html("<span>Password belum di isi</span>");
+		            return false;
+		        } 
+		        else if(level.length==0)
+		        {
+		            $("#level").focus();
+		            $("#error_level").addClass("message error");
+		            $("#error_level").html("<span>level belum di isi</span>");
 		            return false;
 		        }
 		        else

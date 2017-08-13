@@ -37,6 +37,11 @@
 					?>
                 </div>
                 <div class="row gutters auto">
+                    <?php
+                    if(isset($_SESSION["level"])) {
+                        if($_SESSION["level"] == 0)
+                        {
+                            ?>
                     <div id="kriteria" onclick="location.href='index.php?page=kriteria_show'" class="col menu text-center">
                         <div class="icon">&#xa4;</div>
                         <div class="title">Kelola Data Kriteria</div>
@@ -61,7 +66,17 @@
                         <div class="icon">&#xa4;</div>
                         <div class="title">Laporan</div>
                     </div>
-                    
+                        <?php
+                    }else{
+                        ?>
+                        <div id="kriteria" onclick="location.href='index.php?page=Laporan'" class="col menu text-center">
+                        <div class="icon">&#xa4;</div>
+                        <div class="title">Laporan</div>
+                        </div>
+                    <?php
+                        }
+                    }
+                        ?>
                     <!-- <div id="logout" onclick="location.href='index.php?page=logout'" class="col menu text-center">
                         <div class="icon">&#xd3;</div>
                         <div class="title">Logout</div>

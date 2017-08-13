@@ -13,7 +13,7 @@
 	if ($jumlah>0) {
 	$row = mysqli_fetch_assoc($hasil);
 	$_SESSION["user"] = $row['username'];
-	
+	$_SESSION["level"] = $row['level'];
 	header('Location:index.php');
     exit;
 	die();

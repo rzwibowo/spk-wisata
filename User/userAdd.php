@@ -19,6 +19,14 @@
     						<input type="password" name="password" class="w50" id="password">
                             <div id="message-password" style="margin-top: 5px;"></div>
     					</div>
+                        <div class="form-item">
+                            <label for="level">Level User</label>
+                            <select name="level" class="w50" id="level">
+                                <option value="0">Admin</option>
+                                <option value="1">Pemimpin</option>
+                            </select>
+                            <div id="message-level" style="margin-top: 5px;"></div>
+                        </div>
     					
     					<div class="row between">
     						<button type="reset" class="button secondary outline w15">Reset</button>
@@ -35,6 +43,7 @@
     <script type="text/javascript">
         var username;
         var password;
+        var level;
     /*
      validasi nama user , tidak bleh kosong
     */
@@ -52,7 +61,26 @@
         });
 
     /*
-     validasi password , tidak bleh kosong
+     validasi level , tidak bleh kosong
+    */
+        $("#level").blur(function(){
+            level= $(this).val();
+            
+            if(level.length==0)
+            {
+              $("#message-level").show();
+              $("#message-level").addClass("message error");
+              $("#message-level").html("<span>level tidak boleh kosong!</span>");
+            }else
+            {
+              $("#message-level").hide();
+            } 
+        });
+      
+
+    /*
+
+         validasi password , tidak bleh kosong
     */
         $("#password").blur(function(){
             password= $(this).val();
@@ -88,6 +116,13 @@
                 $("#password").focus();
                 $("#message-password").addClass("message error");
                 $("#message-password").html("<span>password tidak boleh kosong!</span>");
+                return false;
+            }
+            else if(level.length==0)
+            {
+                $("#level").focus();
+                $("#message-level").addClass("message error");
+                $("#message-level").html("<span>level tidak boleh kosong!</span>");
                 return false;
             }
             else

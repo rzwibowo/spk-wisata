@@ -30,6 +30,19 @@ $row = mysqli_fetch_assoc($hasil);
                             <input type="password" name="password" class="w50" id="password" value="">
                             <div id="message-password" style="margin-top: 5px;"></div>
                         </div>
+                        <div class="form-item">
+                            <label for="level">Level User</label>
+                            <select name="level" class="w50" id="level">
+                                <?php
+                                    if($row['level'] == 0){
+                                        echo "<option value='0' selected>Admin</option><option value='1'>Pemimpin</option>";
+                                    }else{
+                                        echo "<option value='0'>Admin</option><option value='1' selected>Pemimpin</option>";
+                                    }
+                                ?>
+                            </select>
+                            <div id="message-level" style="margin-top: 5px;"></div>
+                        </div>
                         <div class="row between">
                             <button type="reset" class="button secondary outline w15">Reset</button>
                             <button type="submit" name="submit" value="UserUpdate" class="button upper" id="kirim">Simpan</button>
@@ -39,11 +52,13 @@ $row = mysqli_fetch_assoc($hasil);
             </div>
         </div>
     </div>
-
+    <br>
+    <br>
 
     <script type="text/javascript">
         var username;
         var password;
+        var level;
     /*
      validasi username , tidak bleh kosong
     */
@@ -59,6 +74,25 @@ $row = mysqli_fetch_assoc($hasil);
                 $("#message-username").hide();
             } 
         });
+
+    /*
+
+     validasi level , tidak bleh kosong
+    */
+        $("#level").blur(function(){
+            level= $(this).val();
+            
+            if(level.length==0)
+            {
+              $("#message-level").show();
+              $("#message-level").addClass("message error");
+              $("#message-level").html("<span>level tidak boleh kosong!</span>");
+            }else
+            {
+              $("#message-level").hide();
+            } 
+        });
+      
 
     /*
      validasi password , tidak bleh kosong

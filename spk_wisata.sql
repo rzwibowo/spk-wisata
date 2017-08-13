@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 13 Agu 2017 pada 06.31
+-- Generation Time: 13 Agu 2017 pada 12.04
 -- Versi Server: 10.1.24-MariaDB
 -- PHP Version: 7.1.6
 
@@ -159,15 +159,17 @@ INSERT INTO `subkriteria` (`subkriteria_id`, `kriteria_id`, `id_alternatif`, `pr
 CREATE TABLE `user` (
   `user_id` int(11) NOT NULL,
   `username` varchar(30) NOT NULL,
-  `password` varchar(50) NOT NULL
+  `password` varchar(50) NOT NULL,
+  `level` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `user`
 --
 
-INSERT INTO `user` (`user_id`, `username`, `password`) VALUES
-(2, 'ngadimin', '5449ccea16d1cc73990727cd835e45b5');
+INSERT INTO `user` (`user_id`, `username`, `password`, `level`) VALUES
+(2, 'ngadimin', '5449ccea16d1cc73990727cd835e45b5', 0),
+(3, 'pimpinan', 'a1475279de60efc1b418fa651f695384', 1);
 
 -- --------------------------------------------------------
 
@@ -259,12 +261,12 @@ ALTER TABLE `detail_kriteria`
 -- AUTO_INCREMENT for table `detail_kriteria_wisata`
 --
 ALTER TABLE `detail_kriteria_wisata`
-  MODIFY `id_detail_kriteria_wisata` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id_detail_kriteria_wisata` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
